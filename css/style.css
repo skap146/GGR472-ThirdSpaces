@@ -1,0 +1,49 @@
+/* menu format */
+#sidebar
+{
+    height: 100%; /* 100% Full-height */
+    width: 0; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Stay on top */
+    top: 0; /* Stay at the top */
+    left: 0;
+    background-color: #eb6963; /* Light red */
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-bottom: 30vh; /* Padding based on screen height */
+    transition: 0.5s; /* 0.5 second transition effect for menu */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+/* menu text */
+.menu_text
+{
+    font-family: 'Montserrat', sans-serif;
+    color: black;
+}
+
+/* menu links */
+.menu_link
+{
+    text-decoration: none;
+    color: black;
+    font-family: 'Montserrat', sans-serif;
+    display: block;
+    padding: 10px 0;
+}
+
+#menu_btn span
+{
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px 0;
+    background: white;
+}
+
+#main
+{
+    transition: 0.5s; /* to match the menu transition */
+}

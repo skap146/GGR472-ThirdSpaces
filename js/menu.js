@@ -1,5 +1,5 @@
 // menu pixel width when open
-const pixel_width = 250;
+const pixel_width = 200;
 
 // respond to menu button upon click
 const menu_btn = document.getElementById("menu_btn");

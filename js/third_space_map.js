@@ -61,7 +61,7 @@ map.on('load', () =>
     });
 })
 
-// React to checkbox being enabled/disabled
+// React to checkbox being enabled/disabled on map
 function toggleLayer(layer_id)
 {
     const visibility = map.getLayoutProperty(layer_id, 'visibility');

@@ -17,6 +17,13 @@
     flex-direction: column;
 }
 
+/* menu button */
+#menu_btn
+{
+    position: absolute;
+    top: 0;
+}
+
 /* menu text */
 .menu_text
 {
@@ -34,6 +41,14 @@
     padding: 10px 0;
 }
 
+/* background title */
+.background_pg_title
+{
+    padding-top: 5vh;
+    font-size: 24px;
+    font-family: 'Montserrat', sans-serif;
+}
+
 #menu_btn span
 {
     display: block;
@@ -46,4 +61,27 @@
 #main
 {
     transition: 0.5s; /* to match the menu transition */
+}
+
+/* Map positioning and sizing */
+/* Relative position used so the website is more functional when screen width/height changes */
+.map_container
+{
+    position: relative;
+    margin: auto;
+    top: 20px;
+    bottom: 0;
+    width: 80%;
+    height: 500px;
+}
+
+#layer_toggle
+{
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    padding: 15px;
+    background-color: mintcream;
+    z-index: 10;
+    opacity: 0.8;
 }

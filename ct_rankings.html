@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,31 +32,11 @@
 <!-- main page content (groups all page content so it can pushed when menu is displayed) --->
 <div id="main">
   <!-- title and paragraph text -->
-  <div class="background_pg_title text-center">Third Spaces: How Accessible Are They?.</div>
-  <p class="text-center"> <br><br> Third spaces are critical spaces to facilitate social interactions, yet
-    are they easily accessible? Explore this map to find out!.</p>
+  <div class="background_pg_title text-center">Check your Census Tract: is your CT Third Space Friendly?</div>
+  <p class="text-center"> <br><br> Toronto is split up into various census tracts (CT's). But how easy is it
+  for individuals living there to access third spaces? Find out by exploring this map below!</p>
   <!-- webpage map --->
-  <div id="my-map" class="map_container">
-    <!-- toggle/filter third space types -->
-    <div id="layer_toggle">
-      <h4 class="text-center"> Layer Toggle </h4>
-      <label>
-        <input type="checkbox" value="library_point" onchange="toggleLayer(value)" checked>
-        Libraries
-      </label><br>
-      <label>
-        <input type="checkbox" value="early_child_centre_point" onchange="toggleLayer(value)" checked>
-        EarlyON Child Centres
-      </label><br>
-      <label>
-        <input type="checkbox" value="parks_and_rec_point" onchange="toggleLayer(value)" checked>
-        Parks and Recreation
-      </label><br>
-      <label>
-        <input type="checkbox" value="places_of_worship_point" onchange="toggleLayer(value)" checked>
-        Places of Worship
-      </label><br>
-    </div>
+  <div id="my-map" class="map_container"></div>
   </div>
   <!-- menu button -->
   <div class="btn btn-primary" id="menu_btn">
@@ -67,10 +48,9 @@
 
 <!-- link to menu handler script -->
 <script src="js/menu.js"></script>
-
-<!-- link to third space map script -->
-<script src="js/third_space_map.js"></script>
-
+<!-- link to census tract rankings script -->
+<script src="js/ct_rankings.js"></script>
 </body>
 </html>
+
 

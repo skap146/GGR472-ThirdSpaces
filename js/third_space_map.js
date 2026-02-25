@@ -13,7 +13,7 @@ map.on('load', () =>
     // Load external GeoJSON files
     map.addSource('library_data', {type: 'geojson',data: 'data/library.geojson'});
     map.addSource('early_child_centre_data', {type: 'geojson', data: 'data/EarlyONChildCentres.geojson'});
-    map.addSource('parks_and_rec_data', {type: 'geojson', data: 'data/Parks_and_Rec.geojson'});
+    map.addSource('comm_centre_data', {type: 'geojson', data: 'data/community_centres.geojson'});
     map.addSource('places_of_worship_data', {type: 'geojson', data: 'data/Places_of_Worship.geojson'});
 
     // Visualize building layer
@@ -40,9 +40,9 @@ map.on('load', () =>
 
     // Visualize parks and rec layer
     map.addLayer({
-        'id': 'parks_and_rec_point',
+        'id': 'comm_centre_point',
         'type': 'circle',
-        'source': 'parks_and_rec_data',
+        'source': 'comm_centre_data',
         'paint': {
             'circle-radius': 5,
             'circle-color': '#006911'

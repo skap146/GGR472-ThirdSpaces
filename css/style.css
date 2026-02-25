@@ -85,3 +85,9 @@
     z-index: 10;
     opacity: 0.8;
 }
+
+/* Geocoder positioning */
+.geocoder {
+    position: relative;
+    margin: 10px 0;
+}

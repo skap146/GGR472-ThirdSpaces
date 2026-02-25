@@ -8,6 +8,16 @@ const map = new mapboxgl.Map({
     center: [-79.39, 43.66], // starting position [lng, lat] - centered in Toronto
     zoom: 12}) // starting zoom level
 
+// create geocoder
+const geocoder = new MapboxGeocoder({
+    accessToken: mapboxgl.accessToken,
+    mapboxgl: mapboxgl,
+    countries: "ca"
+});
+
+// Append geocoder variable to goeocoder HTML div to position on page
+document.getElementById('my-geocoder').appendChild(geocoder.onAdd(map));
+
 map.on('load', () =>
 {
     // Load external GeoJSON files
@@ -60,6 +70,8 @@ map.on('load', () =>
         }
     });
 })
+
+// Add geocoding functionality
 
 // React to checkbox being enabled/disabled on map
 function toggleLayer(layer_id)

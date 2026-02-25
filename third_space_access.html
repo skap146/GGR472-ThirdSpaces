@@ -13,6 +13,13 @@
   <script src='https://api.mapbox.com/mapbox-gl-js/v3.18.1/mapbox-gl.js'></script>
   <link href='https://api.mapbox.com/mapbox-gl-js/v3.18.1/mapbox-gl.css' rel='stylesheet' />
 
+  <!-- Import Mapbox Geocoder Plugin -->
+  <script
+          src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.1.0/mapbox-gl-geocoder.min.js"></script>
+  <link rel="stylesheet"
+        href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.1.0/mapbox-gl-geocoder.css"
+        type="text/css">
+
   <!-- link to css stylesheet -->
   <link rel="stylesheet" href="css/style.css">
 </head>
@@ -56,7 +63,15 @@
         Places of Worship
       </label><br>
     </div>
+
+    <!-- map search button  -->
+    <div class="map-search-container">
+      <label for="my-geocoder">Search for location</label>
+      <div id="my-geocoder" class="geocoder"></div>
+    </div>
   </div>
+
+
   <!-- menu button -->
   <div class="btn btn-primary" id="menu_btn">
     <span></span>

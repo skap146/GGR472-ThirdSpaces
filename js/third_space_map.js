@@ -71,108 +71,71 @@ map.on('load', () =>
     });
 })
 
-// Add pop up functionality for third spaces
-thirdSpacePopUps()
-function thirdSpacePopUps()
+// Add interactivity for third space points
+thirdSpaceInteractivity()
+function thirdSpaceInteractivity()
 {
-    // Trigger a pop up when the user clicks on a library point
-   map.addInteraction('library-click-interaction', {
+    const library_field_data = [
+        {'display_name': 'Name', 'field_name': 'BranchName'},
+        {'display_name': 'Address', 'field_name': 'Address'},
+        {'display_name': 'Phone', 'field_name': 'Telephone'}]
+
+    const child_centre_data = [
+        {'display_name': 'Name', 'field_name': 'buildingName'},
+        {'display_name': 'Address', 'field_name': 'full_address'},
+        {'display_name': 'Phone', 'field_name': 'phone'}]
+
+    const places_of_worship_data = [
+        {'display_name': 'Name', 'field_name': 'PLACE_NAME'},
+        {'display_name': 'Address', 'field_name': 'ADDRESS_FULL'},
+        {'display_name': 'Phone', 'field_name': 'FTH_PHONE'},
+        {'display_name': 'Faith', 'field_name': 'FTH_FAITH'}]
+
+    const community_centre_data = [
+            {'display_name': 'Name', 'field_name': 'ASSET_NAME'},
+        {'display_name': 'Address', 'field_name': 'ADDRESS'},
+        {'display_name': 'Phone', 'field_name': 'PHONE'}]
+
+    makeLayerInteractive('library-click-interaction', 'library_point', library_field_data);
+    makeLayerInteractive('childcentre-click-interaction', 'early_child_centre_point', child_centre_data);
+    makeLayerInteractive('placesofworship-click-interaction', 'places_of_worship_point', places_of_worship_data);
+    makeLayerInteractive('commcentre-click-interaction', 'comm_centre_point', community_centre_data);
+
+}
+
+// Create third space pop up and buffer function
+function makeLayerInteractive(interaction_name, layer_id, field_names) {
+    map.addInteraction(interaction_name, {
         type: 'click',
-        target: { layerId: 'library_point'},
+        target: { layerId: layer_id},
         handler: (e) => {
             // Create a walkability buffer around the user point
             console.log(e.feature.geometry.coordinates)
 
-            // if click .... then createBuffer
-            // first click = pop up
-            // second click = buffer
-            createBuffer(e.feature.geometry.coordinates)
+            // Generate pop up message based on field data
+            let msg = ""
+            console.log(field_names);
+            field_names.forEach(item => {
+                msg += `<div>${item.display_name}: ${e.feature.properties[item.field_name]}</div>`;
+            })
+            msg += "<button class='walkability_btn'>Show Walkability</button>"
 
-            // Copy coordinates array.
-            const name = e.feature.properties["BranchName"];
-            const address = e.feature.properties["Address"];
-            const phone_number = e.feature.properties["Telephone"]
-
-            new mapboxgl.Popup()
-                // Set the pop up to display at the coordinates of mouse click
+            // Display the pop up with a walkability option
+            let popUp = new mapboxgl.Popup()
                 .setLngLat(e.lngLat)
-                .setHTML("Library:  " + name +
-                    "<br> Address:  " + address +
-                    "<br> Phone: " + phone_number)
-                .addTo(map); // Show popup on map
-        }
-    });
+                .setHTML(msg)
+                .addTo(map);
 
-    // Trigger a pop up when the user clicks on a early ON child centre point
-    map.addInteraction('childcentre-click-interaction', {
-        type: 'click',
-        target: { layerId: 'early_child_centre_point'},
-        handler: (e) => {
-
-            console.log(e.feature.properties)
-
-            const name = e.feature.properties["buildingName"];
-            const address = e.feature.properties["full_address"];
-            const phone_number = e.feature.properties["phone"]
-
-            new mapboxgl.Popup()
-                // Set the pop up to display at the coordinates of mouse click
-                .setLngLat(e.lngLat)
-                .setHTML("Child Centre:  " + name +
-                    "<br> Address:  " + address +
-                    "<br> Phone: " + phone_number)
-                .addTo(map); // Show popup on map
-        }
-    });
-
-    // Trigger a pop up when the user clicks on a community center point
-    map.addInteraction('placesofworship-click-interaction', {
-        type: 'click',
-        target: { layerId: 'places_of_worship_point'},
-        handler: (e) => {
-
-            console.log(e.feature.properties)
-
-            const name = e.feature.properties["PLACE_NAME"];
-            const address = e.feature.properties["ADDRESS_FULL"];
-            const phone_number = e.feature.properties["FTH_PHONE"];
-            const faith = e.feature.properties["FTH_FAITH"];
-
-
-
-            new mapboxgl.Popup()
-                // Set the pop up to display at the coordinates of mouse click
-                .setLngLat(e.lngLat)
-                .setHTML("Name:  " + name +
-                    "<br> Address:  " + address +
-                    "<br> Phone: " + phone_number +
-                "<br> Faith: " + faith)
-                .addTo(map); // Show popup on map
-        }
-    });
-
-    // Trigger a pop when the user clicks on a place of worship point
-    map.addInteraction('commcentre-click-interaction', {
-        type: 'click',
-        target: { layerId: 'comm_centre_point'},
-        handler: (e) => {
-
-            console.log(e.feature.properties)
-
-            const name = e.feature.properties["ASSET_NAME"];
-            const address = e.feature.properties["ADDRESS"];
-            const phone_number = e.feature.properties["PHONE"]
-
-            new mapboxgl.Popup()
-                // Set the pop up to display at the coordinates of mouse click
-                .setLngLat(e.lngLat)
-                .setHTML("Community Centre:  " + name +
-                    "<br> Address:  " + address +
-                    "<br> Phone: " + phone_number)
-                .addTo(map); // Show popup on map
+            // If the user clicks on the walkability button, displays walkability buffer around point
+            popUp.getElement().querySelector('.walkability_btn').addEventListener('click', () => {
+                    popUp.remove();
+                    createBuffer(e.feature.geometry.coordinates)
+                }
+            )
         }
     });
 }
+
 
 // React to checkbox being enabled/disabled on map
 function toggleLayer(layer_id)

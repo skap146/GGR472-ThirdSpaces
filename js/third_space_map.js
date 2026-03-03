@@ -1,3 +1,6 @@
+// Current active pop up
+let activePopUp = null;
+
 // Access token for mapbox
 mapboxgl.accessToken = 'pk.eyJ1Ijoia2FwY2Fuc2giLCJhIjoiY21rNDRqY3NyMDN6OTNlb2p0MGNoMmt3NyJ9.dJfye3FVRxijxl2_diGcPQ';
 
@@ -121,14 +124,14 @@ function makeLayerInteractive(interaction_name, layer_id, field_names) {
             msg += "<button class='walkability_btn'>Show Walkability</button>"
 
             // Display the pop up with a walkability option
-            let popUp = new mapboxgl.Popup()
+            activePopUp = new mapboxgl.Popup()
                 .setLngLat(e.lngLat)
                 .setHTML(msg)
                 .addTo(map);
 
             // If the user clicks on the walkability button, displays walkability buffer around point
-            popUp.getElement().querySelector('.walkability_btn').addEventListener('click', () => {
-                    popUp.remove();
+            activePopUp.getElement().querySelector('.walkability_btn').addEventListener('click', () => {
+                    activePopUp.remove();
                     createBuffer(e.feature.geometry.coordinates)
                 }
             )
@@ -185,5 +188,40 @@ function createBuffer(coords)
         }
     });
 
+
+}
+
+// Handle reset logic
+// Check if user clicked on a third space layer
+map.on('click', e => {const features = map.queryRenderedFeatures(e.point, {
+    layers: [
+        'library_point',
+        'early_child_centre_point',
+        'places_of_worship_point',
+        'comm_centre_point'
+    ]
+});
+
+// If nothing is clicked, remove pop up and buffer data
+    if (!features.length) {
+        resetMap();
+    }}
+)
+
+// Removes the active pop up from the map
+function resetMap() {
+    // If active pop up exists, remove and set to null
+    console.log('ONE!');
+    if (activePopUp) {
+        activePopUp.remove();
+        activePopUp = null;
+    }
+
+    // Remove the buffer if it exists
+    if (map.getLayer('walkability_buffer_polygon'))
+    {
+        map.removeLayer('walkability_buffer_polygon');
+        map.removeSource('walkability_buffer_data');
+    }
 
 }

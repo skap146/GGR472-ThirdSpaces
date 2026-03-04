@@ -1,38 +1,64 @@
 // map zoom in level after clicking enter btn from search
 const zoom_level = 15;
 
-// fetch data from the library json
-// Load the library data (we don't want to load it more than once)
-let library_locs = new Map()
-load_feature_data()
-function load_feature_data()
+// search for third space dropdown element
+const dropdown_element = document.getElementById('search_third_space');
+
+// Load all the third space data for the dropdown selector
+// names of third spaces and their coordinates
+let third_space_locs = new Map();
+// names of third spaces and their types
+let third_space_types = new Map();
+load_third_space_dropdown()
+function load_third_space_dropdown()
 {
-    fetch('data/library.geojson')
+    load_layer_in_dropdown('data/library.geojson', 'BranchName', 'library_point');
+    // load_layer_in_dropdown('data/EARLYONChildCentres.geojson', 'buildingName', 'early_child_centre_point');
+    // load_layer_in_dropdown('data/Parks_and_Rec.geojson', 'ASSET_NAME', 'comm_centre_point');
+    load_layer_in_dropdown('data/Places_of_Worship.geojson', 'PLACE_NAME', 'places_of_worship_point');
+}
+
+// Loads the names for an individual specific that
+// Parameters: the third space geoJSON file, the name field of that file, the map to store the loc data
+function load_layer_in_dropdown(geoJSON, name_field, type)
+{
+    // fetches our file
+    fetch(geoJSON)
         .then(response => {
             return response.json()})
         .then(data => {
             let features = data.features;
-            console.log(features);
 
             features.forEach(feature => {
-                // append the name and loc of each feature to our library_locs
-                library_locs.set(feature.properties["BranchName"], feature["geometry"]["coordinates"])
+                // append the name and loc of each feature to our third_space_locs
+                // include reference to type of third space
+                third_space_locs.set(feature.properties[name_field], feature["geometry"]["coordinates"])
+                third_space_types.set(feature.properties[name_field], type)
 
-                // append to the dropdown
-                let dropdown_element = document.getElementById('search_third_space')
+                console.log(feature.properties[name_field]);
+
+                // append to the dropdown (only if name is defined)
                 let third_space_option = document.createElement('option');
-                third_space_option.textContent = feature.properties["BranchName"];
-                third_space_option.value = feature.properties["BranchName"];
-                dropdown_element.appendChild(third_space_option);
+                third_space_option.textContent = feature.properties[name_field];
+                third_space_option.value = feature.properties[name_field];
+
+                // saves the type of the third space (important for filtering later)
+                third_space_option.setAttribute("type", type);
+
+                if (third_space_option.textContent) {
+                    dropdown_element.appendChild(third_space_option);
+                }
             })
         })
 }
+
+console.log(dropdown_element)
 
 //
 const enter_btn = document.getElementById('enter_btn');
 enter_btn.addEventListener('click', function(){
     let name = document.getElementById('search_third_space').value;
-    let coords = library_locs.get(name);
+    let coords = third_space_locs.get(name);
     map.flyTo({center: coords, zoom: zoom_level});
 })
 
@@ -181,19 +207,67 @@ function makeLayerInteractive(interaction_name, layer_id, field_names) {
 
 
 // React to checkbox being enabled/disabled on map
+// Changes visible third space points as well as searchable third points
+// Only visible points can be searched.
 function toggleLayer(layer_id)
 {
     const visibility = map.getLayoutProperty(layer_id, 'visibility');
 
+    // remove all elements from the dropdown
+    // dropdown_element.innerHTML = '';
+
     // Toggle the visibility of the layer
     if (visibility === 'none')
     {
+        // let layer to visible, ensure all points are in search bar
         map.setLayoutProperty(layer_id, 'visibility', 'visible');
+
+        // iterate through the third_space_types map
+        // if a third space has a type that equals the layer_id being inserted, it is
+        // now visible on map so add it to the third space search bar
+        console.log(third_space_types);
+        for (const [name, type] of third_space_types) {
+            if (type === layer_id) {
+                // append to the dropdown (only if name is defined)
+                let third_space_option = document.createElement('option');
+                third_space_option.textContent = name;
+                third_space_option.value = name;
+
+                // saves the type of the third space (important for filtering later)
+                third_space_option.setAttribute("type", type);
+
+                if (third_space_option.textContent) {
+                    dropdown_element.appendChild(third_space_option);
+                }
+            }
+
+        }
     }
     else
     {
         map.setLayoutProperty(layer_id, 'visibility', 'none');
+
+        // loop through all third space elements in dropdown selection, remove any
+        // third space points in the layer layer_id from the search dropdown
+        // the ... is essential ... DO NOT REMOVE! This is because we need a copy of
+        // the children objects that does not reference the original array, else this
+        // loop breaks the down!
+        let children = [...dropdown_element.children];
+        let length = children.length;
+        for (let i = length - 1; i >= 0; i--) {
+            let third_space_elem = children[i];
+
+            // if this third space has become invisible on the map, remove it as a search option as well
+            if (third_space_elem.getAttribute('type') === layer_id)
+            {
+                dropdown_element.removeChild(third_space_elem);
+            }
+        }
     }
+
+
+    // add third spaces that are visible on the map
+
 
     // clear map pop up and buffer
     resetMap()
@@ -263,7 +337,6 @@ map.on('click', e => {const features = map.queryRenderedFeatures(e.point, {
 // Removes the active pop up from the map
 function resetMap() {
     // If active pop up exists, remove and set to null
-    console.log('ONE!');
     if (activePopUp) {
         activePopUp.remove();
         activePopUp = null;

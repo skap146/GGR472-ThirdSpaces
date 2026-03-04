@@ -13,8 +13,8 @@ load_third_space_dropdown()
 function load_third_space_dropdown()
 {
     load_layer_in_dropdown('data/library.geojson', 'BranchName', 'library_point');
-    // load_layer_in_dropdown('data/EARLYONChildCentres.geojson', 'buildingName', 'early_child_centre_point');
-    // load_layer_in_dropdown('data/Parks_and_Rec.geojson', 'ASSET_NAME', 'comm_centre_point');
+    load_layer_in_dropdown('data/EARLYONChildCentres.geojson', 'buildingName', 'early_child_centre_point');
+    load_layer_in_dropdown('data/Parks_and_Rec.geojson', 'ASSET_NAME', 'comm_centre_point');
     load_layer_in_dropdown('data/Places_of_Worship.geojson', 'PLACE_NAME', 'places_of_worship_point');
 }
 

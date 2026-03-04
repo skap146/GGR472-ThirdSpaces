@@ -3,58 +3,26 @@ import json
 
 def convert_to_geojson(json_file: str):
     data = None
+    feature_arr =[]
     with open(json_file) as file:
         data = json.load(file)
 
-    feature_arr = []
+        features = data['features']
 
-    for feature in data:
+    for feature in features:
+        coords = [feature['geometry']['coordinates'][0][0], feature['geometry']['coordinates'][0][1]]
 
-        for key in feature:
-            if isinstance(feature[key], str) and feature[key].isnumeric():
-                feature[key] = int(feature[key])
+        feature.pop("geometry")
 
-        if feature['Lat'] != '' and feature['Long'] != '':
-            coords = [float(feature['Long']), float(feature['Lat'])]
+        feature["geometry"] =  {
+            "coordinates": coords,
+            "type": "Point"}
 
-            feature.pop('Lat')
-            feature.pop('Long')
-
-            feature_arr.append({"type": "Feature", "properties": feature, "geometry": {
-                                "coordinates": coords,
-                "type": "Point"
-            }})
+        feature_arr.append(feature)
 
     geojson = {"type": "FeatureCollection", "features": feature_arr}
-    print(geojson)
 
-    with open('library.geojson', 'w') as file:
+    with open('Places_of_Worship.geojson', 'w') as file:
         json.dump(geojson, file, indent=2)
 
-convert_to_geojson('tpl-branch-general-information-2023.json')
-
-"""
-"features": [{"type": "Feature",
-    "properties": {"name": "Casa Madera",
-      "cuisine": "Mexican",
-      "num reviews": 638,
-      "average rating": 4.9},
-    "geometry": {
-      "coordinates": [
-        -79.40149366083658,
-        43.643169006058265
-      ],
-      "type": "Point"
-    }}, {"type": "Feature",
-    "properties": {"name": "Harriet's Rooftop",
-      "cuisine": "Japanese",
-      "num reviews": 206,
-      "average rating": 4.8},
-    "geometry": {
-      "coordinates": [
-        -79.40124418782041,
-        43.643258022059456
-      ],
-      "type": "Point"
-    }},
- """
+convert_to_geojson('Places_of_Worship.geojson')

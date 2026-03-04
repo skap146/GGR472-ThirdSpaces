@@ -86,6 +86,25 @@
     opacity: 0.8;
 }
 
+/* Title for dropdown menu styling */
+.dropdown-title
+{
+    color: black;
+    font-size: 14px;
+    white-space: nowrap;
+    padding-left: 30px;
+}
+
+/* Dropdown menu positioning */
+.form-group
+{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    width: 80%;
+    justify-content: center;
+}
+
 /* Geocoder positioning */
 .geocoder {
     position: relative;

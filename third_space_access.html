@@ -38,12 +38,31 @@
   <a href="ct_rankings.html" class="menu_link">CT Third Space <br> Rankings Map</a>
 </div>
 
+
 <!-- main page content (groups all page content so it can pushed when menu is displayed) --->
 <div id="main">
   <!-- title and paragraph text -->
   <div class="background_pg_title text-center">Third Spaces: How Accessible Are They?.</div>
   <p class="text-center"> <br><br> Third spaces are critical spaces to facilitate social interactions, yet
     are they easily accessible? Explore this map to find out!.</p>
+
+  <!-- Searching for a third space functionality -->
+  <div class="row">
+    <div class="col-md-4">
+    </div>
+    <div class="col-md-4">
+      <!-- Third space selection  -->
+      <div class="form-group">
+        <label for="search_third_space" class="dropdown-title">Search for Third Space:</label>
+        <select id="search_third_space" class="form-control">
+        </select>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <a class="btn btn-danger" id="enter_btn">Enter</a>
+    </div>
+  </div>
+
   <!-- webpage map --->
   <div id="my-map" class="map_container">
     <!-- toggle/filter third space types -->
@@ -66,13 +85,6 @@
         Places of Worship
       </label><br>
     </div>
-
-<!--    &lt;!&ndash; map search button  &ndash;&gt;-->
-<!--    <div class="map-search-container">-->
-<!--      <label for="my-geocoder">Search for location</label>-->
-<!--      <div id="my-geocoder" class="geocoder"></div>-->
-<!--    </div>-->
-
 
   <!-- menu button -->
   <div class="btn btn-primary" id="menu_btn">

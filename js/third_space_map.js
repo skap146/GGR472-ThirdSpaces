@@ -1,5 +1,45 @@
+// map zoom in level after clicking enter btn from search
+const zoom_level = 15;
+
+// fetch data from the library json
+// Load the library data (we don't want to load it more than once)
+let library_locs = new Map()
+load_feature_data()
+function load_feature_data()
+{
+    fetch('data/library.geojson')
+        .then(response => {
+            return response.json()})
+        .then(data => {
+            let features = data.features;
+            console.log(features);
+
+            features.forEach(feature => {
+                // append the name and loc of each feature to our library_locs
+                library_locs.set(feature.properties["BranchName"], feature["geometry"]["coordinates"])
+
+                // append to the dropdown
+                let dropdown_element = document.getElementById('search_third_space')
+                let third_space_option = document.createElement('option');
+                third_space_option.textContent = feature.properties["BranchName"];
+                third_space_option.value = feature.properties["BranchName"];
+                dropdown_element.appendChild(third_space_option);
+            })
+        })
+}
+
+//
+const enter_btn = document.getElementById('enter_btn');
+enter_btn.addEventListener('click', function(){
+    let name = document.getElementById('search_third_space').value;
+    let coords = library_locs.get(name);
+    map.flyTo({center: coords, zoom: zoom_level});
+})
+
 // Current active pop up
 let activePopUp = null;
+
+
 
 // Access token for mapbox
 mapboxgl.accessToken = 'pk.eyJ1Ijoia2FwY2Fuc2giLCJhIjoiY21rNDRqY3NyMDN6OTNlb2p0MGNoMmt3NyJ9.dJfye3FVRxijxl2_diGcPQ';
@@ -154,6 +194,9 @@ function toggleLayer(layer_id)
     {
         map.setLayoutProperty(layer_id, 'visibility', 'none');
     }
+
+    // clear map pop up and buffer
+    resetMap()
 }
 
 // Create buffer when user clicked on point
@@ -205,7 +248,16 @@ map.on('click', e => {const features = map.queryRenderedFeatures(e.point, {
 // If nothing is clicked, remove pop up and buffer data
     if (!features.length) {
         resetMap();
-    }}
+    }
+    else {
+        // Remove the buffer if it exists
+        if (map.getLayer('walkability_buffer_polygon'))
+        {
+            map.removeLayer('walkability_buffer_polygon');
+            map.removeSource('walkability_buffer_data');
+        }
+    }
+    }
 )
 
 // Removes the active pop up from the map

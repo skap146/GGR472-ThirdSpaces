@@ -1,6 +1,9 @@
 // map zoom in level after clicking enter btn from search
 const zoom_level = 15;
 
+// current layers toggled on
+let visible_layers = ['library_point', 'early_child_centre_point', 'comm_centre_point', 'places_of_worship_point']
+
 // search for third space dropdown element
 const dropdown_element = document.getElementById('search_third_space');
 
@@ -216,11 +219,22 @@ function toggleLayer(layer_id)
         // let layer to visible, ensure all points are in search bar
         map.setLayoutProperty(layer_id, 'visibility', 'visible');
         curr_visibility = 'visible';
+
+        // add the layer to the visible layers variable
+        visible_layers.push(layer_id);
     }
     else {
         map.setLayoutProperty(layer_id, 'visibility', 'none');
         curr_visibility = 'none';
+
+        // remove the layer from the visible layers variable
+        let index = visible_layers.indexOf(layer_id);
+        if (index > -1) {
+            visible_layers.splice(index, 1);
+        }
     }
+
+    console.log('Visible Layers:' , visible_layers);
 
     // loop through all third space elements in dropdown selection, and only display
     // third space types that are visible on the map
@@ -341,7 +355,7 @@ function filterByName(user_str) {
     for (let i = length - 1; i >= 0; i--) {
         let third_space_elem = children[i];
 
-        // Check if user string is in the element name, if so keep it.
+        // Check if user string is in the element name and the element's type is a visible layer, if so keep it.
         // Otherwise, delete.
         // This process converts both strings to uppercase before testing since
         // search should not be case sensitive.
@@ -349,11 +363,12 @@ function filterByName(user_str) {
         let third_space_name_upper = third_space_name.toUpperCase();
         let user_str_upper = user_str.toUpperCase()
 
-        if (!third_space_name_upper.includes(user_str_upper)) {
-            third_space_elem.style.display = 'none';
+        if (third_space_name_upper.includes(user_str_upper) &&
+            visible_layers.includes(third_space_elem.getAttribute('type'))) {
+            third_space_elem.style.display = '';
         }
         else {
-            third_space_elem.style.display = '';
+            third_space_elem.style.display = 'none';
         }
     }
 }

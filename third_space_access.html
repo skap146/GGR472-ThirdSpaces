@@ -48,19 +48,23 @@
 
   <!-- Searching for a third space functionality -->
   <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-6">
+      <!-- Filter third space options by name -->
+      <div class="form-group">
+        <label for="search_string" class="dropdown-title">Name Filter:</label>
+        <input type="email" class="form-control" id="search_string" placeholder="Filter by third space name" onchange="filterByName(value)">
+      </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-6">
       <!-- Third space selection  -->
       <div class="form-group">
         <label for="search_third_space" class="dropdown-title">Search for Third Space:</label>
         <select id="search_third_space" class="form-control">
+          <option class="placeholder" selected disabled hidden>Choose an Option</option>
         </select>
+        <a class="btn btn-danger" id="enter_btn">Enter</a>
       </div>
-    </div>
-    <div class="col-md-4">
-      <a class="btn btn-danger" id="enter_btn">Enter</a>
-    </div>
+      </div>
   </div>
 
   <!-- webpage map --->

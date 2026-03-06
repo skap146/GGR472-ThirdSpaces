@@ -14,7 +14,7 @@ function load_third_space_dropdown()
 {
     load_layer_in_dropdown('data/library.geojson', 'BranchName', 'library_point');
     load_layer_in_dropdown('data/EARLYONChildCentres.geojson', 'buildingName', 'early_child_centre_point');
-    load_layer_in_dropdown('data/Parks_and_Rec.geojson', 'ASSET_NAME', 'comm_centre_point');
+    load_layer_in_dropdown('data/community_centres.geojson', 'ASSET_NAME', 'comm_centre_point');
     load_layer_in_dropdown('data/Places_of_Worship.geojson', 'PLACE_NAME', 'places_of_worship_point');
 }
 
@@ -35,8 +35,6 @@ function load_layer_in_dropdown(geoJSON, name_field, type)
                 third_space_locs.set(feature.properties[name_field], feature["geometry"]["coordinates"])
                 third_space_types.set(feature.properties[name_field], type)
 
-                console.log(feature.properties[name_field]);
-
                 // append to the dropdown (only if name is defined)
                 let third_space_option = document.createElement('option');
                 third_space_option.textContent = feature.properties[name_field];
@@ -51,8 +49,6 @@ function load_layer_in_dropdown(geoJSON, name_field, type)
             })
         })
 }
-
-console.log(dropdown_element)
 
 //
 const enter_btn = document.getElementById('enter_btn');
@@ -212,65 +208,40 @@ function makeLayerInteractive(interaction_name, layer_id, field_names) {
 function toggleLayer(layer_id)
 {
     const visibility = map.getLayoutProperty(layer_id, 'visibility');
-
-    // remove all elements from the dropdown
-    // dropdown_element.innerHTML = '';
+    let curr_visibility= ''
 
     // Toggle the visibility of the layer
     if (visibility === 'none')
     {
         // let layer to visible, ensure all points are in search bar
         map.setLayoutProperty(layer_id, 'visibility', 'visible');
-
-        // iterate through the third_space_types map
-        // if a third space has a type that equals the layer_id being inserted, it is
-        // now visible on map so add it to the third space search bar
-        console.log(third_space_types);
-        for (const [name, type] of third_space_types) {
-            if (type === layer_id) {
-                // append to the dropdown (only if name is defined)
-                let third_space_option = document.createElement('option');
-                third_space_option.textContent = name;
-                third_space_option.value = name;
-
-                // saves the type of the third space (important for filtering later)
-                third_space_option.setAttribute("type", type);
-
-                if (third_space_option.textContent) {
-                    dropdown_element.appendChild(third_space_option);
-                }
-            }
-
-        }
+        curr_visibility = 'visible';
     }
-    else
-    {
+    else {
         map.setLayoutProperty(layer_id, 'visibility', 'none');
+        curr_visibility = 'none';
+    }
 
-        // loop through all third space elements in dropdown selection, remove any
-        // third space points in the layer layer_id from the search dropdown
-        // the ... is essential ... DO NOT REMOVE! This is because we need a copy of
-        // the children objects that does not reference the original array, else this
-        // loop breaks the down!
-        let children = [...dropdown_element.children];
-        let length = children.length;
-        for (let i = length - 1; i >= 0; i--) {
-            let third_space_elem = children[i];
+    // loop through all third space elements in dropdown selection, and only display
+    // third space types that are visible on the map
+    let children = dropdown_element.children;
+    let length = children.length;
+    for (let i = length - 1; i >= 0; i--) {
+        let third_space_elem = children[i];
 
-            // if this third space has become invisible on the map, remove it as a search option as well
-            if (third_space_elem.getAttribute('type') === layer_id)
+        // if this third space has become invisible on the map, remove it as a search option as well
+        // otherwise, if visible on the map, ensure it is visible on the dropdown as well.
+        if (third_space_elem.getAttribute('type') === layer_id) {
+            if (curr_visibility === 'none')
             {
-                dropdown_element.removeChild(third_space_elem);
+                third_space_elem.style.display = 'none';
+            }
+            else {
+                third_space_elem.style.display = '';
             }
         }
     }
-
-
-    // add third spaces that are visible on the map
-
-
-    // clear map pop up and buffer
-    resetMap()
+    resetMap();
 }
 
 // Create buffer when user clicked on point
@@ -349,4 +320,40 @@ function resetMap() {
         map.removeSource('walkability_buffer_data');
     }
 
+}
+
+// // "stored" third spaces, in the dropdown but not selected under name filter
+// let stored_spaces = [];
+
+// Filter third spaces by user generated substring
+// Keeps all third spaces in the dropdown menu that contain the user generated substring
+function filterByName(user_str) {
+    console.log('user string: ', user_str);
+
+    // handle empty string case by "filtering for all"
+    if (!user_str) {
+        user_str = ' ';
+    }
+
+    // Loop through each element in the dropdown
+    let children = [...dropdown_element.children];
+    let length = children.length;
+    for (let i = length - 1; i >= 0; i--) {
+        let third_space_elem = children[i];
+
+        // Check if user string is in the element name, if so keep it.
+        // Otherwise, delete.
+        // This process converts both strings to uppercase before testing since
+        // search should not be case sensitive.
+        let third_space_name = third_space_elem.value;
+        let third_space_name_upper = third_space_name.toUpperCase();
+        let user_str_upper = user_str.toUpperCase()
+
+        if (!third_space_name_upper.includes(user_str_upper)) {
+            third_space_elem.style.display = 'none';
+        }
+        else {
+            third_space_elem.style.display = '';
+        }
+    }
 }

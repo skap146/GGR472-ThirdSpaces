@@ -22,7 +22,7 @@ def convert_to_geojson(json_file: str):
 
     geojson = {"type": "FeatureCollection", "features": feature_arr}
 
-    with open('Places_of_Worship.geojson', 'w') as file:
+    with open('community_centres.geojson', 'w') as file:
         json.dump(geojson, file, indent=2)
 
-convert_to_geojson('Places_of_Worship.geojson')
+convert_to_geojson('community_centres.geojson')

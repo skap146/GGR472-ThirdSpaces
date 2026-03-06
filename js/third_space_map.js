@@ -7,6 +7,9 @@ let visible_layers = ['library_point', 'early_child_centre_point', 'comm_centre_
 // search for third space dropdown element
 const dropdown_element = document.getElementById('search_third_space');
 
+// current buffering distance (on load, it's 500)
+let buffer_dist = 500;
+
 // Load all the third space data for the dropdown selector
 // names of third spaces and their coordinates
 let third_space_locs = new Map();
@@ -266,8 +269,7 @@ function createBuffer(coords)
         {"marker-color": "#0F0"})
 
     // Buffer 500 m (starting point) for our clicked third space point
-    const dist = 500
-    let buffer = turf.buffer(point, dist, {units: "metres"})
+    let buffer = turf.buffer(point, buffer_dist, {units: "metres"})
     console.log(buffer)
 
     // Remove previous query data (if it exists)
@@ -371,4 +373,20 @@ function filterByName(user_str) {
             third_space_elem.style.display = 'none';
         }
     }
+}
+
+// React to change in buffer distance
+function changebufDist(buf_val) {
+    // Update text
+    let buffer_msg_elem = document.getElementById('slider_msg');
+    buffer_msg_elem.textContent = 'Current buffer distance: ' + buf_val + 'm';
+
+
+    // Update rendered buffer (if it clearly exists on the map)
+    if (map.getLayer('walkability_buffer_polygon')) {
+        // work on code here
+    }
+
+    // Change global buf dist
+    buffer_dist = buf_val;
 }

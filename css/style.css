@@ -110,3 +110,8 @@
     position: relative;
     margin: 10px 0;
 }
+
+/* Placeholder text styling */
+.placeholder {
+    color: gray;
+}

@@ -10,6 +10,9 @@ const dropdown_element = document.getElementById('search_third_space');
 // current buffering distance (on load, it's 500)
 let buffer_dist = 500;
 
+// current point to buffer (only one buffer can be active at a time)
+let curr_buf_point = null;
+
 // Load all the third space data for the dropdown selector
 // names of third spaces and their coordinates
 let third_space_locs = new Map();
@@ -265,11 +268,11 @@ function toggleLayer(layer_id)
 function createBuffer(coords)
 {
     // Convert coordinates to turf point
-    let point = turf.point(coords,
+    curr_buf_point = turf.point(coords,
         {"marker-color": "#0F0"})
 
     // Buffer 500 m (starting point) for our clicked third space point
-    let buffer = turf.buffer(point, buffer_dist, {units: "metres"})
+    let buffer = turf.buffer(curr_buf_point, buffer_dist, {units: "metres"})
     console.log(buffer)
 
     // Remove previous query data (if it exists)
@@ -381,12 +384,29 @@ function changebufDist(buf_val) {
     let buffer_msg_elem = document.getElementById('slider_msg');
     buffer_msg_elem.textContent = 'Current buffer distance: ' + buf_val + 'm';
 
+    // Change global buf dist
+    buffer_dist = buf_val;
 
     // Update rendered buffer (if it clearly exists on the map)
     if (map.getLayer('walkability_buffer_polygon')) {
         // work on code here
-    }
+        map.removeLayer('walkability_buffer_polygon');
+        map.removeSource('walkability_buffer_data');
 
-    // Change global buf dist
-    buffer_dist = buf_val;
+        let buffer = turf.buffer(curr_buf_point, buffer_dist, {units: "metres"})
+        console.log(buffer)
+
+        // Add the data from the new user query to the map
+        map.addSource('walkability_buffer_data', {type: 'geojson',data: buffer});
+        map.addLayer({
+            'id': 'walkability_buffer_polygon',
+            'type': 'fill',
+            'source': 'walkability_buffer_data',
+            'paint': {
+                'fill-color': '#888888', // Test alternative colours and style properties
+                'fill-opacity': 0.4,
+                'fill-outline-color': 'black'
+            }
+        });
+    }
 }

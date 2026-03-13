@@ -1,6 +1,9 @@
 // map zoom in level after clicking enter btn from search
 const zoom_level = 15;
 
+// average walking speed
+const avg_walk_speed = 1.3;
+
 // current layers toggled on
 let visible_layers = ['library_point', 'early_child_centre_point', 'comm_centre_point', 'places_of_worship_point']
 
@@ -382,7 +385,8 @@ function filterByName(user_str) {
 function changebufDist(buf_val) {
     // Update text
     let buffer_msg_elem = document.getElementById('slider_msg');
-    buffer_msg_elem.textContent = 'Current buffer distance: ' + buf_val + 'm';
+    let walking_time = Math.round((buf_val / avg_walk_speed) / 60);
+    buffer_msg_elem.innerHTML = `Current buffer distance: ${buf_val} m <br> Within a ${walking_time} minute walk`;
 
     // Change global buf dist
     buffer_dist = buf_val;

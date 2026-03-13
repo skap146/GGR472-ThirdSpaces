@@ -63,6 +63,63 @@
     transition: 0.5s; /* to match the menu transition */
 }
 
+/* custom checkbox styling (with help of copilot) */
+.check input {
+    display: none;
+}
+.check .box_lib {
+    width: 12px;
+    height: 12px;
+    border: 2px solid #007cbf;
+    border-radius: 6px;
+    display: inline-block;
+    vertical-align: middle;
+    cursor: pointer;
+}
+.check input:checked + .box_lib {
+    background-color: #007cbf;
+    opacity: 0.7;
+}
+.check .box_earlyON {
+    width: 12px;
+    height: 12px;
+    border: 2px solid #d16411;
+    border-radius: 6px;
+    display: inline-block;
+    vertical-align: middle;
+    cursor: pointer;
+}
+.check input:checked + .box_earlyON {
+    background-color: #d16411;
+    opacity: 0.7;
+}
+.check .box_comm {
+    width: 12px;
+    height: 12px;
+    border: 2px solid #006911;
+    border-radius: 6px;
+    display: inline-block;
+    vertical-align: middle;
+    cursor: pointer;
+}
+.check input:checked + .box_comm {
+    background-color: #006911;
+    opacity: 0.7;
+}
+.check .box_worship {
+    width: 12px;
+    height: 12px;
+    border: 2px solid #b8116a;
+    border-radius: 6px;
+    display: inline-block;
+    vertical-align: middle;
+    cursor: pointer;
+}
+.check input:checked + .box_worship {
+    background-color: #b8116a;
+    opacity: 0.7;
+}
+
 /* Map positioning and sizing */
 /* Relative position used so the website is more functional when screen width/height changes */
 .map_container

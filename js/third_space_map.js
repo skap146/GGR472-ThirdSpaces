@@ -21,6 +21,21 @@ let curr_buf_point = null;
 let third_space_locs = new Map();
 // names of third spaces and their types
 let third_space_types = new Map();
+// third space point types and their field names
+let type_to_fields = new Map([['library_point', [
+    {'display_name': 'Name', 'field_name': 'BranchName'},
+    {'display_name': 'Address', 'field_name': 'Address'},
+    {'display_name': 'Phone', 'field_name': 'Telephone'}]], ['early_child_centre_point', [
+    {'display_name': 'Name', 'field_name': 'buildingName'},
+    {'display_name': 'Address', 'field_name': 'full_address'},
+    {'display_name': 'Phone', 'field_name': 'phone'}]], ['comm_centre_point', [
+    {'display_name': 'Name', 'field_name': 'ASSET_NAME'},
+    {'display_name': 'Address', 'field_name': 'ADDRESS'},
+    {'display_name': 'Phone', 'field_name': 'PHONE'}]], ['places_of_worship_point', [
+    {'display_name': 'Name', 'field_name': 'PLACE_NAME'},
+    {'display_name': 'Address', 'field_name': 'ADDRESS_FULL'},
+    {'display_name': 'Phone', 'field_name': 'FTH_PHONE'},
+    {'display_name': 'Faith', 'field_name': 'FTH_FAITH'}]]]);
 load_third_space_dropdown()
 function load_third_space_dropdown()
 {
@@ -44,7 +59,7 @@ function load_layer_in_dropdown(geoJSON, name_field, type)
             features.forEach(feature => {
                 // append the name and loc of each feature to our third_space_locs
                 // include reference to type of third space
-                third_space_locs.set(feature.properties[name_field], feature["geometry"]["coordinates"])
+                third_space_locs.set(feature.properties[name_field], feature)
                 third_space_types.set(feature.properties[name_field], type)
 
                 // append to the dropdown (only if name is defined)
@@ -66,8 +81,21 @@ function load_layer_in_dropdown(geoJSON, name_field, type)
 const enter_btn = document.getElementById('enter_btn');
 enter_btn.addEventListener('click', function(){
     let name = document.getElementById('user_input').value;
-    let coords = third_space_locs.get(name);
+    let feature = third_space_locs.get(name);
+    let coords = feature.geometry.coordinates;
+    let click_eve = document.elementFromPoint(coords[0], coords[1]);
     map.flyTo({center: coords, zoom: zoom_level});
+    // After flyTo animation finishes, display popup
+    map.once('moveend', () => {
+        // Construct a synthetic event for your popup function
+        let syntheticEvent = {
+            lngLat: { lng: coords[0], lat: coords[1] },
+            feature: feature
+        };
+
+        // Call the display pop up function
+        displayPopUp(syntheticEvent, type_to_fields.get(third_space_types.get(name)));
+    });
 })
 
 // Current active pop up
@@ -152,31 +180,28 @@ map.on('load', () =>
 thirdSpaceInteractivity()
 function thirdSpaceInteractivity()
 {
-    const library_field_data = [
-        {'display_name': 'Name', 'field_name': 'BranchName'},
-        {'display_name': 'Address', 'field_name': 'Address'},
-        {'display_name': 'Phone', 'field_name': 'Telephone'}]
 
-    const child_centre_data = [
-        {'display_name': 'Name', 'field_name': 'buildingName'},
-        {'display_name': 'Address', 'field_name': 'full_address'},
-        {'display_name': 'Phone', 'field_name': 'phone'}]
+    makeLayerInteractive('library-click-interaction', 'library_point', type_to_fields.get('library_point'));
+    makeLayerInteractive('childcentre-click-interaction', 'early_child_centre_point', type_to_fields.get('early_child_centre_point'));
+    makeLayerInteractive('placesofworship-click-interaction', 'places_of_worship_point', type_to_fields.get('places_of_worship_point'));
+    makeLayerInteractive('commcentre-click-interaction', 'comm_centre_point', type_to_fields.get('comm_centre_point'));
 
-    const places_of_worship_data = [
-        {'display_name': 'Name', 'field_name': 'PLACE_NAME'},
-        {'display_name': 'Address', 'field_name': 'ADDRESS_FULL'},
-        {'display_name': 'Phone', 'field_name': 'FTH_PHONE'},
-        {'display_name': 'Faith', 'field_name': 'FTH_FAITH'}]
+}
+// Display a pop when a point is clicked
+function displayPopUp(e, field_names) {
+    // Generate pop up message based on field data
+    let msg = ""
+    console.log(field_names);
+    field_names.forEach(item => {
+        msg += `<div>${item.display_name}: ${e.feature.properties[item.field_name]}</div>`;
+    })
+    msg += "<button class='walkability_btn'>Show Walkability</button>"
 
-    const community_centre_data = [
-            {'display_name': 'Name', 'field_name': 'ASSET_NAME'},
-        {'display_name': 'Address', 'field_name': 'ADDRESS'},
-        {'display_name': 'Phone', 'field_name': 'PHONE'}]
-
-    makeLayerInteractive('library-click-interaction', 'library_point', library_field_data);
-    makeLayerInteractive('childcentre-click-interaction', 'early_child_centre_point', child_centre_data);
-    makeLayerInteractive('placesofworship-click-interaction', 'places_of_worship_point', places_of_worship_data);
-    makeLayerInteractive('commcentre-click-interaction', 'comm_centre_point', community_centre_data);
+    // Display the pop up with a walkability option
+    activePopUp = new mapboxgl.Popup()
+        .setLngLat(e.lngLat)
+        .setHTML(msg)
+        .addTo(map);
 
 }
 
@@ -189,19 +214,7 @@ function makeLayerInteractive(interaction_name, layer_id, field_names) {
             // Create a walkability buffer around the user point
             console.log(e.feature.geometry.coordinates)
 
-            // Generate pop up message based on field data
-            let msg = ""
-            console.log(field_names);
-            field_names.forEach(item => {
-                msg += `<div>${item.display_name}: ${e.feature.properties[item.field_name]}</div>`;
-            })
-            msg += "<button class='walkability_btn'>Show Walkability</button>"
-
-            // Display the pop up with a walkability option
-            activePopUp = new mapboxgl.Popup()
-                .setLngLat(e.lngLat)
-                .setHTML(msg)
-                .addTo(map);
+            displayPopUp(e, field_names);
 
             // If the user clicks on the walkability button, displays walkability buffer around point
             activePopUp.getElement().querySelector('.walkability_btn').addEventListener('click', () => {

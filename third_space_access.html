@@ -47,25 +47,18 @@
     are they easily accessible? Explore this map to find out!.</p>
 
   <!-- Searching for a third space functionality -->
-  <div class="row">
-    <div class="col-md-6">
-      <!-- Filter third space options by name -->
-      <div class="form-group">
-        <label for="search_string" class="dropdown-title">Name Filter:</label>
-        <input type="email" class="form-control" id="search_string" placeholder="Filter by third space name" onchange="filterByName(value)">
+  <div class="container_third_space_dropdown">
+    <div class="dropdown">
+      <!-- Search bar (visible on init) -->
+      <label for="user_input">
+      </label><input type="text" placeholder="Enter third space name..." id="user_input" class="search_bar" onkeyup="searchThirdSpaces(value)">
+      <!-- Dropdwon menu (react to user search) -->
+      <div id="third_space_dropdown" class="dropdown-content" onclick="setThirdSpaceValue(event)">
       </div>
     </div>
-    <div class="col-md-6">
-      <!-- Third space selection  -->
-      <div class="form-group">
-        <label for="search_third_space" class="dropdown-title">Search for Third Space:</label>
-        <select id="search_third_space" class="form-control">
-          <option class="placeholder" selected disabled hidden>Choose an Option</option>
-        </select>
-        <a class="btn btn-danger" id="enter_btn">Enter</a>
-      </div>
-      </div>
+    <a class="btn btn-danger" id="enter_btn">Enter</a>
   </div>
+
 
   <!-- webpage map --->
   <div id="my-map" class="map_container">

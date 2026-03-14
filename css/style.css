@@ -154,29 +154,44 @@
     opacity: 0.8;
 }
 
-/* Title for dropdown menu styling */
-.dropdown-title
-{
-    color: black;
-    font-size: 14px;
-    white-space: nowrap;
-    padding-left: 30px;
-}
-
-/* Dropdown menu positioning */
-.form-group
-{
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    width: 80%;
+/* Dropdown positioning */
+.container_third_space_dropdown {
+    margin: auto;
     justify-content: center;
+    align-items: center;
+    display: flex;
+    gap: 10px;
 }
 
-/* Geocoder positioning */
-.geocoder {
+/* Search bar styling */
+.search_bar {
+    width: 400px;
+    height: 40px;
+    border-radius: 10px;
+    border-width: 1px;
+}
+
+/* Hide dropdown menu at first */
+.dropdown {
     position: relative;
-    margin: 10px 0;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    width: 100%;
+    z-index: 1000;
+    background-color: white;
+    border: 1px solid gray;
+    border-radius: 5px;
+    padding: 6px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    max-height: 250px;
+    overflow-y: auto;
+}
+.dropdown-content div:hover{
+    background-color: #2647c7;
+    color: white;
 }
 
 /* Placeholder text styling */

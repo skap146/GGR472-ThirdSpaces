@@ -8,7 +8,7 @@ const avg_walk_speed = 1.3;
 let visible_layers = ['library_point', 'early_child_centre_point', 'comm_centre_point', 'places_of_worship_point']
 
 // search for third space dropdown element
-const dropdown_element = document.getElementById('search_third_space');
+const dropdown_element = document.getElementById('third_space_dropdown');
 
 // current buffering distance (on load, it's 500)
 let buffer_dist = 500;
@@ -48,7 +48,7 @@ function load_layer_in_dropdown(geoJSON, name_field, type)
                 third_space_types.set(feature.properties[name_field], type)
 
                 // append to the dropdown (only if name is defined)
-                let third_space_option = document.createElement('option');
+                let third_space_option = document.createElement('div');
                 third_space_option.textContent = feature.properties[name_field];
                 third_space_option.value = feature.properties[name_field];
 
@@ -65,7 +65,7 @@ function load_layer_in_dropdown(geoJSON, name_field, type)
 //
 const enter_btn = document.getElementById('enter_btn');
 enter_btn.addEventListener('click', function(){
-    let name = document.getElementById('search_third_space').value;
+    let name = document.getElementById('user_input').value;
     let coords = third_space_locs.get(name);
     map.flyTo({center: coords, zoom: zoom_level});
 })
@@ -349,8 +349,12 @@ function resetMap() {
 
 // Filter third spaces by user generated substring
 // Keeps all third spaces in the dropdown menu that contain the user generated substring
-function filterByName(user_str) {
-    console.log('user string: ', user_str);
+function searchThirdSpaces(user_str) {
+    console.log('1');
+    console.log(user_str);
+
+    // show the dropdown menu
+    dropdown_element.style.display = 'block';
 
     // handle empty string case by "filtering for all"
     if (!user_str) {
@@ -379,6 +383,13 @@ function filterByName(user_str) {
             third_space_elem.style.display = 'none';
         }
     }
+}
+// When user clicks on dropdown element, set it as the current value in search bar
+function setThirdSpaceValue (event){
+    let value = event.target.value;
+    let user_input = document.getElementById('user_input');
+    user_input.value = value;
+    dropdown_element.style.display = 'none';
 }
 
 // React to change in buffer distance

@@ -95,6 +95,13 @@ enter_btn.addEventListener('click', function(){
 
         // Call the display pop up function
         displayPopUp(syntheticEvent, type_to_fields.get(third_space_types.get(name)));
+
+        // If the user clicks on the walkability button, displays walkability buffer around point
+        activePopUp.getElement().querySelector('.walkability_btn').addEventListener('click', () => {
+                activePopUp.remove();
+                createBuffer(coords)
+            }
+        )
     });
 })
 

@@ -11,7 +11,7 @@ const map = new mapboxgl.Map({
 map.on('load', () =>
 {
     // Load external GeoJSON files
-    map.addSource('neighbourhoods_data', {type: 'geojson',data: 'data/Neighbourhoods.geojson'});
+    map.addSource('neighbourhoods_data', {type: 'geojson',data: 'data/tor_neighbourhood-demography.geojson'});
 
     map.addLayer({
         'id': 'neighbourhoods_poly', // Create your own layer ID
@@ -19,7 +19,7 @@ map.on('load', () =>
         'source': 'neighbourhoods_data', // Must match source ID from addSource Method
         'paint': {
             'fill-color': '#222222', // Test alternative colours and style properties
-            'fill-opacity': 0.4,
-            'fill-outline-color': 'black'
+            'fill-opacity': 1,
+            'fill-outline-color': 'yellow'
         }})
 })

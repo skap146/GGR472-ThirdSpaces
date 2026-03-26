@@ -35,5 +35,5 @@ merged_gdf = gpd.GeoDataFrame(
     merged, geometry=merged['geometry'], crs="EPSG:4326"
 )
 
-merged_gdf.to_file('tor_neighbourhood-demography.geojson', driver='GeoJSON')
+merged_gdf.to_file('tor_neighbourhood_demography.geojson', driver='GeoJSON')
 

@@ -120,16 +120,57 @@
     opacity: 0.7;
 }
 
+/* Form group styling */
+.form-group {
+    margin: auto;
+    display: flex;
+    width: 80%;
+    align-items: center;
+    justify-content: center;
+}
+/* Title for dropdown menu styling */
+.dropdown-title
+{
+    color: black;
+    font-size: 14px;
+    white-space: nowrap;
+    padding-right: 10px;
+}
+
+/* legend styling and positioning */
+.legend {
+    position: absolute;
+    background-color: #fff;
+    border-radius: 8px;
+    bottom: 0;
+    margin-bottom: 20px;
+    font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    padding: 10px;
+    right: 20px;
+    z-index: 100;
+    opacity: 0.8;
+}
+/* legend items styling and positioning */
+.legend-colrect {
+    display: inline-block;
+    height: 10px;
+    width: 10px;
+    margin-right: 5px;
+    background-color: var(--legendcolor);
+}
+.legend-text {
+    font-size: 16px;
+}
+
 /* Map positioning and sizing */
 /* Relative position used so the website is more functional when screen width/height changes */
 .map_container
 {
-    position: relative;
+    position: absolute;
     margin: auto;
-    top: 20px;
+    top: 250px;
     bottom: 0;
-    width: 80%;
-    height: 500px;
+    width: 100%;
 }
 
 #layer_toggle
@@ -140,7 +181,7 @@
     padding: 15px;
     background-color: mintcream;
     z-index: 10;
-    opacity: 0.8;
+    opacity: 1;
 }
 
 #buffer_slider
@@ -151,7 +192,7 @@
     padding: 15px;
     background-color: mintcream;
     z-index: 10;
-    opacity: 0.8;
+    opacity: 1;
 }
 
 /* Dropdown positioning */

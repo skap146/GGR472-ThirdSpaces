@@ -16,6 +16,9 @@
 
   <!-- link to css stylesheet -->
   <link rel="stylesheet" href="css/style.css">
+
+  <!-- Turf.js -->
+  <script src='https://unpkg.com/@turf/turf@7.2.0/turf.min.js'></script>
 </head>
 <body>
 <!-- body script: boostrap -->
@@ -32,24 +35,64 @@
 <!-- main page content (groups all page content so it can pushed when menu is displayed) --->
 <div id="main">
   <!-- title and paragraph text -->
-  <div class="background_pg_title text-center">Check your Census Tract: is your CT Third Space Friendly?</div>
-  <p class="text-center"> <br><br> Toronto is split up into various census tracts (CT's). But how easy is it
-  for individuals living there to access third spaces? Find out by exploring this map below!</p>
+  <div class="background_pg_title text-center">Check your Neighbourhood: is your Neighbourhood Third-Space Friendly?</div>
+  <p class="text-center"> <br><br> Toronto is split up into 158 Neighbourhoods. But how easy is it
+  for individuals living in a particular neighbourhood to access third spaces? Find out by exploring this map below!</p>
+
+  <div class="row">
+    <div class="col-3">
+      <div class="form-group">
+        <label for="popup-display-type" class="dropdown-title">Pop-Ups Display:</label>
+        <select id="popup-display-type" class="form-control" onchange="updatePopUpInput(value)">
+          <option value="On Click">On Click</option>
+          <option value="On Hover">On Hover</option>
+          <option value="None (Disable Pop-Ups)">None (Disable Pop-Ups)</option>
+        </select>
+      </div>
+    </div>
+    <!-- dropdown for tooltip type -->
+    <div class="col-6">
+      <!-- dropdown for filtering -->
+      <div class="form-group">
+        <label for="choropleth-variable" class="dropdown-title">Classify neighbourhoods by:</label>
+        <select id="choropleth-variable" class="form-control" onchange="updateMap(value)">
+          <option value="Cluster">Clusters</option>
+          <option value="Third Spaces Per Capita">Third Spaces Per Capita</option>
+          <option value="% Visible Minority">% Visible Minority</option>
+          <option value="% Obtained Bachelor's Degree">% Obtained Bachelor's Degree</option>
+          <option value="Median Income">Median Income</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-3"></div>
+    </div>
+
+
+
   <!-- webpage map --->
   <div id="my-map" class="map_container"></div>
+
+  <p>Cluster Attributes: find a place on this page to describe cluster attributes</p>
+  <!-- Add legend -->
+  <div id='legend' class='legend'>
+    <h3 class="legend-title" id="legend-title"></h3>
   </div>
+
+
   <!-- menu button -->
   <div class="btn btn-primary" id="menu_btn">
     <span></span>
     <span></span>
     <span></span>
   </div>
+
+
 </div>
 
 <!-- link to menu handler script -->
 <script src="js/menu.js"></script>
 <!-- link to census tract rankings script -->
-<script src="js/ct_rankings.js"></script>
+<script src="js/neighbourhood_cluster.js"></script>
 </body>
 </html>
 

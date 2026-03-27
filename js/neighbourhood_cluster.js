@@ -280,3 +280,18 @@ function roundDecimals(num, dp) {
     const powOf10 = Math.pow(10, dp)
     return Math.round(num * powOf10) / powOf10;
 }
+
+
+// Add an event listener to toggle on/off the cluster description
+let cluster_btn = document.getElementById('cluster_desc_btn');
+cluster_btn.addEventListener('click', (e) => {
+    let cluster_attributes = document.getElementById('cluster-attributes');
+    if (cluster_btn.textContent === 'Hide Cluster Attributes') {
+        cluster_btn.textContent = 'Show Cluster Attributes';
+        cluster_attributes.style.opacity = '0';
+    }
+    else {
+        cluster_btn.textContent = 'Hide Cluster Attributes';
+        cluster_attributes.style.opacity = '1';
+    }
+})

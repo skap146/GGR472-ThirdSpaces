@@ -162,6 +162,23 @@
     font-size: 16px;
 }
 
+/* cluster description styling and positioning */
+#cluster-attributes {
+    position: absolute;
+    background-color: #fff;
+    border-radius: 8px;
+    bottom: 0;
+    margin-bottom: 20px;
+    font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    padding: 10px;
+    left: 20px;
+    z-index: 100;
+    opacity: 1;
+}
+.cluster-desc-text {
+    font-size: 14px;
+}
+
 /* Map positioning and sizing */
 /* Relative position used so the website is more functional when screen width/height changes */
 .map_container

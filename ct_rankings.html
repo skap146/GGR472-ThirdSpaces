@@ -64,7 +64,9 @@
         </select>
       </div>
     </div>
-    <div class="col-3"></div>
+    <div class="col-3">
+      <a class="btn btn-danger" id="cluster_desc_btn">Hide Cluster Attributes</a>
+    </div>
     </div>
 
 
@@ -72,10 +74,17 @@
   <!-- webpage map --->
   <div id="my-map" class="map_container"></div>
 
-  <p>Cluster Attributes: find a place on this page to describe cluster attributes</p>
   <!-- Add legend -->
   <div id='legend' class='legend'>
     <h3 class="legend-title" id="legend-title"></h3>
+  </div>
+  <!-- Add attributes for each cluster -->
+  <div id="cluster-attributes">
+    <h3 id="cluster-desc-title">Cluster Attributes</h3>
+    <span class='cluster-desc-text'> Cluster 1: lowest % with bachelor's degree, lowest third spaces per capita, low median income, highest % visible minority <br></span>
+    <span class='cluster-desc-text'>Cluster 2: highest % with bachelor's degree, highest third spaces per capita, high median income, lowest % visible minority<br></span>
+    <span class='cluster-desc-text'>Cluster 3: high % with bachelor's degree, high third spaces per capita, highest median income, low % visible minority <br></span>
+    <span class='cluster-desc-text'>Cluster 4: low % with bachelor's degree, low third spaces per capita, lowest median income, high % visible minority</span>
   </div>
 
 

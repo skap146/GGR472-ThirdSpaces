@@ -86,6 +86,9 @@ const legend_data = {'Cluster': [{'label': '1', 'colour': color_schemes['assorte
         {'label': '$108,000-$136,000', 'colour': color_schemes['blues'][2]},
         {'label': '$136,000+', 'colour': color_schemes['blues'][3]}]}
 
+// whether the map is in hover mode or not (default false)
+let hovering = false;
+
 // load_layer_pts
 function load_layer_pts(geoJSON)
 {
@@ -195,12 +198,6 @@ function updateLegend(legend_items, title) {
     })
 }
 function updatePopUpInput(input_type) {
-    map.on('mouseleave', 'neighbourhoods_poly', () => {
-        if (input_type === 'On Hover') {
-            active_pop_up.remove();
-        }
-    });
-
     if (input_type === 'None (Disable Pop-Ups)') {
         // remove pop up interactions and current pop up
         map.removeInteraction('neighbourhoods-interaction');
@@ -208,8 +205,14 @@ function updatePopUpInput(input_type) {
         if (active_pop_up) {
             active_pop_up.remove();
         }
+
+        // set hovering mode to false
+        hovering = false;
     }
     else if (input_type === 'On Click') {
+        // set hovering mode to false
+        hovering = false;
+
         // remove previous pop up interactions and current pop up
         map.removeInteraction('neighbourhoods-interaction');
         map.removeInteraction('neighbourhoods-pop-up-remove')
@@ -242,6 +245,9 @@ function updatePopUpInput(input_type) {
         })
     }
     else if (input_type === 'On Hover') {
+        // set hovering mode to false
+        hovering = true;
+
         // remove previous pop up interactions
         map.removeInteraction('neighbourhoods-interaction');
         map.removeInteraction('neighbourhoods-pop-up-remove')
@@ -281,6 +287,12 @@ function roundDecimals(num, dp) {
     return Math.round(num * powOf10) / powOf10;
 }
 
+// Event listener to remove popups when hovering outside the neighbourhoods (in hover mode)
+map.on('mouseleave', 'neighbourhoods_poly', () => {
+    if (hovering) {
+        active_pop_up.remove();
+    }
+});
 
 // Add an event listener to toggle on/off the cluster description
 let cluster_btn = document.getElementById('cluster_desc_btn');

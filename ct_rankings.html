@@ -20,7 +20,7 @@
   <!-- Turf.js -->
   <script src='https://unpkg.com/@turf/turf@7.2.0/turf.min.js'></script>
 </head>
-<body>
+<body class="bg-light-green">
 <!-- body script: boostrap -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
@@ -35,9 +35,9 @@
 <!-- main page content (groups all page content so it can pushed when menu is displayed) --->
 <div id="main">
   <!-- title and paragraph text -->
-  <div class="background_pg_title text-center">Check your Neighbourhood: is your Neighbourhood Third-Space Friendly?</div>
-  <p class="text-center"> <br><br> Toronto is split up into 158 Neighbourhoods. But how easy is it
-  for individuals living in a particular neighbourhood to access third spaces? Find out by exploring this map below!</p>
+  <div class="background_pg_title text-center">CHECK YOUR NEIGHBOURHOOD: IS YOUR NEIGHBOURHOOD THIRD-PLACE FRIENDLY?</div>
+  <p class="text-center desc-text"> <br><br> Toronto is split up into 158 Neighbourhoods. But how easy is it
+  for individuals living in a particular neighbourhood to access third places? Find out by exploring this map below!</p>
 
   <div class="row">
     <div class="col-3">
@@ -67,24 +67,25 @@
     <div class="col-3">
       <a class="btn btn-danger" id="cluster_desc_btn">Hide Cluster Attributes</a>
     </div>
-    </div>
+
+  </div>
 
 
 
   <!-- webpage map --->
-  <div id="my-map" class="map_container"></div>
-
-  <!-- Add legend -->
-  <div id='legend' class='legend'>
-    <h3 class="legend-title" id="legend-title"></h3>
-  </div>
-  <!-- Add attributes for each cluster -->
-  <div id="cluster-attributes">
-    <h3 id="cluster-desc-title">Cluster Attributes</h3>
-    <span class='cluster-desc-text'> Cluster 1: lowest % with bachelor's degree, lowest third spaces per capita, low median income, highest % visible minority <br></span>
-    <span class='cluster-desc-text'>Cluster 2: highest % with bachelor's degree, highest third spaces per capita, high median income, lowest % visible minority<br></span>
-    <span class='cluster-desc-text'>Cluster 3: high % with bachelor's degree, high third spaces per capita, highest median income, low % visible minority <br></span>
-    <span class='cluster-desc-text'>Cluster 4: low % with bachelor's degree, low third spaces per capita, lowest median income, high % visible minority</span>
+  <div id="my-map" class="map_container">
+    <!-- Add attributes for each cluster -->
+    <!-- Add legend -->
+    <div id='legend' class='legend'>
+      <h3 class="legend-title" id="legend-title"></h3>
+    </div>
+    <div id="cluster-attributes">
+      <h3 id="cluster-desc-title">Cluster Attributes</h3>
+      <span class='cluster-desc-text'> Cluster 1: lowest % with bachelor's degree, lowest third spaces per capita, low median income, highest % visible minority <br></span>
+      <span class='cluster-desc-text'>Cluster 2: highest % with bachelor's degree, highest third spaces per capita, high median income, lowest % visible minority<br></span>
+      <span class='cluster-desc-text'>Cluster 3: high % with bachelor's degree, high third spaces per capita, highest median income, low % visible minority <br></span>
+      <span class='cluster-desc-text'>Cluster 4: low % with bachelor's degree, low third spaces per capita, lowest median income, high % visible minority</span>
+    </div>
   </div>
 
 

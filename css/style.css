@@ -1,3 +1,23 @@
+/* -------------- CUSTOM FONTS --------------- */
+
+@font-face {
+    font-family: 'ProximaNova-Bold';
+    src: url('/fonts/ProximaNova-Bold.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* ------------- WEBPAGE ATTRIBUTES --------------- */
+
+
+/* bg colors */
+.bg-light-green {
+    background-color: #d6e4e3
+}
+.bg-light-pink {
+    background-color: #f7edeb
+}
+
 /* menu format */
 #sidebar
 {
@@ -45,8 +65,8 @@
 .background_pg_title
 {
     padding-top: 5vh;
-    font-size: 24px;
-    font-family: 'Montserrat', sans-serif;
+    font-size: 35px;
+    font-family: 'ProximaNova-Bold', sans-serif;
 }
 
 #menu_btn span
@@ -56,6 +76,11 @@
     height: 3px;
     margin: 5px 0;
     background: white;
+}
+
+/* description text formatting */
+.desc-text {
+    font-size: 18px;
 }
 
 #main
@@ -178,6 +203,15 @@
 .cluster-desc-text {
     font-size: 14px;
 }
+#cluster_desc_btn {
+    background-color: #b0bfbe;
+    border-color: #b0bfbe;
+    color: black;
+}
+#cluster_desc_btn:hover {
+    background-color: #a1a8a0;
+    border-color: #a1a8a0;
+}
 
 /* Map positioning and sizing */
 /* Relative position used so the website is more functional when screen width/height changes */
@@ -196,9 +230,10 @@
     bottom: 20px;
     right: 20px;
     padding: 15px;
-    background-color: mintcream;
+    background-color: white;
     z-index: 10;
     opacity: 1;
+    border-radius: 12px;
 }
 
 #buffer_slider
@@ -207,9 +242,10 @@
     bottom: 180px;
     right: 20px;
     padding: 15px;
-    background-color: mintcream;
+    background-color: white;
     z-index: 10;
     opacity: 1;
+    border-radius: 12px;
 }
 
 /* Dropdown positioning */

@@ -17,6 +17,9 @@
 .bg-light-pink {
     background-color: #f7edeb
 }
+.bg-light-orange {
+    background-color: #fff4d4
+}
 
 /* menu format */
 #sidebar
@@ -59,14 +62,48 @@
     font-family: 'Montserrat', sans-serif;
     display: block;
     padding: 10px 0;
+    font-size: 18px;
+}
+/* menu links formatting on hover */
+.menu_link:hover
+{
+   color: #262626;
 }
 
-/* background title */
+/* all webpage titles */
 .background_pg_title
+{
+    padding-top: 5vh;
+    font-size: 50px;
+    font-family: 'ProximaNova-Bold', sans-serif;
+}
+.third_space_pg_title
 {
     padding-top: 5vh;
     font-size: 35px;
     font-family: 'ProximaNova-Bold', sans-serif;
+}
+.neighbourhood_pg_title
+{
+    padding-top: 5vh;
+    font-size: 35px;
+    font-family: 'ProximaNova-Bold', sans-serif;
+}
+
+/* background page headings */
+.background_pg_heading
+{
+    font-size: 35px;
+    font-family: 'ProximaNova-Bold', sans-serif;
+    text-align: center;
+}
+.background_pg_text
+{
+    font-size: 25px;
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+    padding-left: 15vh;
+    padding-right: 15vh;
 }
 
 #menu_btn span

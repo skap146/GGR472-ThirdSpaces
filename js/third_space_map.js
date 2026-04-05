@@ -1,13 +1,14 @@
 // map zoom in level after clicking enter btn from search
 const zoom_level = 15;
 
-// average walking speed
+// average walking speed (in metres / per second)
+// this is used to approximate walking time
 const avg_walk_speed = 1.3;
 
 // current layers toggled on
 let visible_layers = ['library_point', 'early_child_centre_point', 'comm_centre_point', 'places_of_worship_point']
 
-// search for third space dropdown element
+// third space dropdown element
 const dropdown_element = document.getElementById('third_space_dropdown');
 
 // current buffering distance (on load, it's 500)
@@ -15,6 +16,9 @@ let buffer_dist = 500;
 
 // current point to buffer (only one buffer can be active at a time)
 let curr_buf_point = null;
+
+// Current active pop up (initialized to null as there are no pop ups when the page loads)
+let activePopUp = null;
 
 // Load all the third space data for the dropdown selector
 // names of third spaces and their coordinates
@@ -37,6 +41,8 @@ let type_to_fields = new Map([['library_point', [
     {'display_name': 'Phone', 'field_name': 'FTH_PHONE'},
     {'display_name': 'Faith', 'field_name': 'FTH_FAITH'}]]]);
 load_third_space_dropdown()
+
+// Add all third space elements to the dropdown menu
 function load_third_space_dropdown()
 {
     load_layer_in_dropdown('data/library.geojson', 'BranchName', 'library_point');
@@ -70,6 +76,7 @@ function load_layer_in_dropdown(geoJSON, name_field, type)
                 // saves the type of the third space (important for filtering later)
                 third_space_option.setAttribute("type", type);
 
+                // add the third space element to the dropdown (but only if it has content, if null, do not add)
                 if (third_space_option.textContent) {
                     dropdown_element.appendChild(third_space_option);
                 }
@@ -77,17 +84,20 @@ function load_layer_in_dropdown(geoJSON, name_field, type)
         })
 }
 
-//
+// add an event listener to the enter button
 const enter_btn = document.getElementById('enter_btn');
 enter_btn.addEventListener('click', function(){
+    // Obtain the name and coordinates of the selected third space
     let name = document.getElementById('user_input').value;
     let feature = third_space_locs.get(name);
     let coords = feature.geometry.coordinates;
     let click_eve = document.elementFromPoint(coords[0], coords[1]);
+
+    // Fly to the user selected third space and zoom the map
     map.flyTo({center: coords, zoom: zoom_level});
     // After flyTo animation finishes, display popup
     map.once('moveend', () => {
-        // Construct a synthetic event for your popup function
+        // Construct an event for the pop up, an automatic click)
         let syntheticEvent = {
             lngLat: { lng: coords[0], lat: coords[1] },
             feature: feature
@@ -104,12 +114,6 @@ enter_btn.addEventListener('click', function(){
         )
     });
 })
-
-// Current active pop up
-let activePopUp = null;
-
-
-
 // Access token for mapbox
 mapboxgl.accessToken = 'pk.eyJ1Ijoia2FwY2Fuc2giLCJhIjoiY21rNDRqY3NyMDN6OTNlb2p0MGNoMmt3NyJ9.dJfye3FVRxijxl2_diGcPQ';
 
@@ -119,13 +123,6 @@ const map = new mapboxgl.Map({
     style: 'mapbox://styles/mapbox/standard', // style URL
     center: [-79.39, 43.66], // starting position [lng, lat] - centered in Toronto
     zoom: 12}) // starting zoom level
-
-// // create geocoder
-// const geocoder = new MapboxGeocoder({
-//     accessToken: mapboxgl.accessToken,
-//     mapboxgl: mapboxgl,
-//     countries: "ca"
-// });
 
 // Append geocoder variable to goeocoder HTML div to position on page
 // document.getElementById('my-geocoder').appendChild(geocoder.onAdd(map));
@@ -183,7 +180,7 @@ map.on('load', () =>
     });
 })
 
-// Add interactivity for third space points
+// Add interactivity for third space points for each layer
 thirdSpaceInteractivity()
 function thirdSpaceInteractivity()
 {
@@ -233,7 +230,6 @@ function makeLayerInteractive(interaction_name, layer_id, field_names) {
     });
 }
 
-
 // React to checkbox being enabled/disabled on map
 // Changes visible third space points as well as searchable third points
 // Only visible points can be searched.
@@ -263,8 +259,6 @@ function toggleLayer(layer_id)
         }
     }
 
-    console.log('Visible Layers:' , visible_layers);
-
     // loop through all third space elements in dropdown selection, and only display
     // third space types that are visible on the map
     let children = dropdown_element.children;
@@ -272,8 +266,8 @@ function toggleLayer(layer_id)
     for (let i = length - 1; i >= 0; i--) {
         let third_space_elem = children[i];
 
-        // if this third space has become invisible on the map, remove it as a search option as well
-        // otherwise, if visible on the map, ensure it is visible on the dropdown as well.
+        // if this third space has become invisible on the map, remove it as a search option on the dropdown
+        // otherwise, if visible on the map, ensure it is visible on the dropdown.
         if (third_space_elem.getAttribute('type') === layer_id) {
             if (curr_visibility === 'none')
             {
@@ -298,7 +292,7 @@ function createBuffer(coords)
     let buffer = turf.buffer(curr_buf_point, buffer_dist, {units: "metres"})
     console.log(buffer)
 
-    // Remove previous query data (if it exists)
+    // Remove previous buffer data (if it exists)
     if (map.getLayer('walkability_buffer_polygon'))
     {
         map.removeLayer('walkability_buffer_polygon');
@@ -364,9 +358,6 @@ function resetMap() {
 
 }
 
-// // "stored" third spaces, in the dropdown but not selected under name filter
-// let stored_spaces = [];
-
 // Filter third spaces by user generated substring
 // Keeps all third spaces in the dropdown menu that contain the user generated substring
 function searchThirdSpaces(user_str) {
@@ -390,7 +381,7 @@ function searchThirdSpaces(user_str) {
         // Check if user string is in the element name and the element's type is a visible layer, if so keep it.
         // Otherwise, delete.
         // This process converts both strings to uppercase before testing since
-        // search should not be case sensitive.
+        // search should not be case-sensitive.
         let third_space_name = third_space_elem.value;
         let third_space_name_upper = third_space_name.toUpperCase();
         let user_str_upper = user_str.toUpperCase()

@@ -408,7 +408,7 @@ function changebufDist(buf_val) {
     // Update text
     let buffer_msg_elem = document.getElementById('slider_msg');
     let walking_time = Math.round((buf_val / avg_walk_speed) / 60);
-    buffer_msg_elem.innerHTML = `Current buffer distance: ${buf_val} m <br> Within a ${walking_time} minute walk`;
+    buffer_msg_elem.innerHTML = `Current buffer distance: ${buf_val}m <br> Within a ${walking_time} minute walk`;
 
     // Change global buf dist
     buffer_dist = buf_val;

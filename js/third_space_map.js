@@ -89,9 +89,16 @@ const enter_btn = document.getElementById('enter_btn');
 enter_btn.addEventListener('click', function(){
     // Obtain the name and coordinates of the selected third space
     let name = document.getElementById('user_input').value;
+
+    // If name is not the name of a third place on the map, send an alert to the user and return
     let feature = third_space_locs.get(name);
+
+    if (!feature) {
+        alert(`${name} is not currently a third place on the map. Please try again with a different name.`);
+        return;
+    }
+
     let coords = feature.geometry.coordinates;
-    let click_eve = document.elementFromPoint(coords[0], coords[1]);
 
     // Fly to the user selected third space and zoom the map
     map.flyTo({center: coords, zoom: zoom_level});

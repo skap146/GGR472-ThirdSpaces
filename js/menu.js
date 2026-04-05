@@ -4,6 +4,12 @@ const pixel_width = 200;
 // respond to menu button upon click
 const menu_btn = document.getElementById("menu_btn");
 
+// initialize menu
+//
+// let sidebar = document.getElementById("sidebar");
+// sidebar.style.width = pixel_width + "px";
+// main.style.marginLeft = pixel_width + "px";
+
 menu_btn.addEventListener("click", ()  => {
 
     let sidebar = document.getElementById("sidebar");

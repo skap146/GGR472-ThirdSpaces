@@ -80,3 +80,10 @@ or click the ```Show Walkability``` button, which will display a buffer around t
 |                  Third Place Pop Up                  |                        Third Place Walkability Buffer                        |
 |:----------------------------------------------------:|:----------------------------------------------------------------------------:|
 | ![Third Place Pop Up](images/third_place_pop_up.png) | ![Third Place Walkability Buffer](images/third_place_walkability_buffer.png) |
+
+By default, all buffers are 500m. However, the buffer distance slider can be used to dynamically set the distance of a buffer. See the below images 
+for an example of how the slider affects buffers.
+
+| 250m Buffer | 500m Buffer (Default) | 750m Buffer |
+|-------------|:---------------------:|-------------|
+|             |                       |             |

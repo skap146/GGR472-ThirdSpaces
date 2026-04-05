@@ -82,8 +82,33 @@ or click the ```Show Walkability``` button, which will display a buffer around t
 | ![Third Place Pop Up](images/third_place_pop_up.png) | ![Third Place Walkability Buffer](images/third_place_walkability_buffer.png) |
 
 By default, all buffers are 500m. However, the buffer distance slider can be used to dynamically set the distance of a buffer. See the below images 
-for an example of how the slider affects buffers.
+for an example of how the slider affects buffers. The effects of changing the distance can be drastic (and fun!!!), as seen below!
 
-| 250m Buffer | 500m Buffer (Default) | 750m Buffer |
-|-------------|:---------------------:|-------------|
-|             |                       |             |
+| 200m Buffer (Smallest)                      |            500m Buffer (Default)             | 1000m Buffer (Largest)                   |
+|---------------------------------------------|:--------------------------------------------:|------------------------------------------|
+| ![Smallest_Buffer](images/small_buffer.png) | ![Default_Buffer](images/default_buffer.png) | ![Large_Buffer](images/large_buffer.png) |
+
+Another way to search for third places on this map is to search for their names. As you type in characters to the search box, a dropdown 
+menu appears of third places that match the current user input (i.e. contains the user input as a substring). Once you find the name of the 
+desired third place, press Enter. If it matches with the name of a third place point on the map, the map will fly and zoom to that specified point,
+and automatically display it's pop-up. If not, then an alert is displayed that an invalid name was searched for and to try again with a valid name.
+See the below demonstration:
+
+[Third Place Search Demo](demos/third_place_search.mov)
+
+## Neighbourhood Cluster Map
+
+The **Neighbourhood Cluster** map is designed to analyze the topic of third place access from a policy perspective. In this map,
+Toronto is divided into it's 158 neighbourhoods. The main display option is the spatially constrained multivariate clusters. By default, 
+the common characteristics of neighbourhoods in each cluster is displayed on the bottom left corner of the map. However, these characteristics can be 
+hidden/displayed at any time by clicking on the ```Hide/Show Cluster Attributes``` button.
+
+This map features additional customizability options. Each neighbourhood has a pop-up which displays it's name, third spaces per 1000 residents, and 
+socio-economic attributes. The user can select how these pop-ups trigger by toggling the ```Pop-Ups Display``` dropdown menu. ```On Click``` renders these
+pop-ups when clicking on a neighbourhood, ```On Hover``` when hovering over neighbourhoods, and ```None``` disables pop-ups. Additionally, by toggling the
+```Classify neighbourhoods by``` dropdown menu, you can choose to classify neighbourhoods by cluster or by the individual variables that were used to create
+the clusters.
+
+# Credits
+
+This application was created by Shawn and Mehana.

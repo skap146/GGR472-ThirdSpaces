@@ -5,10 +5,14 @@ const pixel_width = 200;
 const menu_btn = document.getElementById("menu_btn");
 
 // initialize menu
-//
-// let sidebar = document.getElementById("sidebar");
-// sidebar.style.width = pixel_width + "px";
-// main.style.marginLeft = pixel_width + "px";
+init_menu()
+function init_menu() {
+    // activate the menu upon page load, menu display is in
+    let sidebar = document.getElementById("sidebar");
+    sidebar.style.width = pixel_width + "px";
+    main.style.marginLeft = pixel_width + "px";
+}
+
 
 menu_btn.addEventListener("click", ()  => {
 

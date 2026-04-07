@@ -257,6 +257,7 @@
     position: absolute;
     margin: auto;
     top: 250px;
+    margin-top: 20px;
     bottom: 0;
     width: 100%;
 }

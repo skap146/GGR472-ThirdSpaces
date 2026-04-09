@@ -7,7 +7,7 @@ Our organization's mission is to raise awareness regarding the importance of thi
 Third places refer to venues where people congregate for causal socialization outside a home (first place) or school/workplace (second place).
 
 In this project there are two maps, the main map is called **Third Space Access** and the
-bonus map is called **Neighbourhood Clusters**. Proceed to the ___ section to learn more about these maps!
+bonus map is called **Neighbourhood Clusters**. Proceed to the **How to Use** section to learn more about these maps!
 
 
 ---

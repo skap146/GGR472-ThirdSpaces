@@ -74,7 +74,7 @@
 .background_pg_title
 {
     padding-top: 5vh;
-    font-size: 50px;
+    font-size: 40px;
     font-family: 'ProximaNova-Bold', sans-serif;
 }
 .third_space_pg_title
@@ -99,8 +99,8 @@
 }
 .background_pg_text
 {
-    font-size: 25px;
-    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+    font-family: 'Palatino', sans-serif;
     text-align: center;
     padding-left: 15vh;
     padding-right: 15vh;
@@ -257,7 +257,7 @@
     position: absolute;
     margin: auto;
     top: 250px;
-    margin-top: 20px;
+    margin-top: 5px;
     bottom: 0;
     width: 100%;
 }
@@ -417,4 +417,16 @@ input:checked + .all_pts_buffer_toggle:before {
 .flex-col {
     display: flex;
     gap: 20px;
+}
+
+/* Background Image and Caption Formatting */
+.img_center {
+    display: block;
+    margin: auto;
+    border-radius: 20%;
+    margin-top: 20px;
+}
+.img_caption {
+    font-size: 14px;
+    font-family: ProximaNova-Bold, sans-serif;
 }

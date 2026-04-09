@@ -109,6 +109,10 @@ pop-ups when clicking on a neighbourhood, ```On Hover``` when hovering over neig
 ```Classify neighbourhoods by``` dropdown menu, you can choose to classify neighbourhoods by cluster or by the individual variables that were used to create
 the clusters.
 
+|     Default (Cluster Map)      | Choropleth (Neighbourhood Third Place Density) |
+|:------------------------------:|:----------------------------------------------:|
+| ![Default](images/cluster.png) |      ![Choropleth](images/choropleth.png)      |
+
 # Credits
 
 This application was created by Shawn and Mehana.

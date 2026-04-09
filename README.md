@@ -96,6 +96,10 @@ See the below demonstration:
 
 [Third Place Search Demo](demos/third_place_search.mov)
 
+Finally, by turning on the "buffer all points" switch, you can buffer every visible point on the map at once. Under this setting, pop-ups are still 
+enabled, but the show walkability button does not display. In this mode, the buffers shown are affected by which third place layers are visible
+and the current user-selected buffer distance.
+
 ## Neighbourhood Cluster Map
 
 The **Neighbourhood Cluster** map is designed to analyze the topic of third place access from a policy perspective. In this map,

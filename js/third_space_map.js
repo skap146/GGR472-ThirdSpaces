@@ -20,11 +20,19 @@ let curr_buf_point = null;
 // Current active pop up (initialized to null as there are no pop ups when the page loads)
 let activePopUp = null;
 
+// whether buffers for every visible point are displayed or not (default: false)
+let buffer_all = false;
+
+// third place id (starts from 1, is used in the load_layer_in_dropdown func to give each point a unique id)
+let id = 1;
+
 // Load all the third space data for the dropdown selector
 // names of third spaces and their coordinates
 let third_space_locs = new Map();
 // names of third spaces and their types
 let third_space_types = new Map();
+// third place ids and their information
+let ids_to_locs = new Map();
 // third space point types and their field names
 let type_to_fields = new Map([['library_point', [
     {'display_name': 'Name', 'field_name': 'BranchName'},
@@ -62,11 +70,17 @@ function load_layer_in_dropdown(geoJSON, name_field, type)
         .then(data => {
             let features = data.features;
 
+            // current third space id (increment by 1 for each feature)
             features.forEach(feature => {
                 // append the name and loc of each feature to our third_space_locs
                 // include reference to type of third space
                 third_space_locs.set(feature.properties[name_field], feature)
                 third_space_types.set(feature.properties[name_field], type)
+
+                // a mapping of the feature's id and it's type and location, as a backup
+                // in case name is undefined
+                // this is used to buffer all points
+                ids_to_locs.set(id, {type: type, coords: feature.geometry.coordinates})
 
                 // append to the dropdown (only if name is defined)
                 let third_space_option = document.createElement('div');
@@ -80,6 +94,8 @@ function load_layer_in_dropdown(geoJSON, name_field, type)
                 if (third_space_option.textContent) {
                     dropdown_element.appendChild(third_space_option);
                 }
+
+                id++;
             })
         })
 }
@@ -206,7 +222,13 @@ function displayPopUp(e, field_names) {
     field_names.forEach(item => {
         msg += `<div>${item.display_name}: ${e.feature.properties[item.field_name]}</div>`;
     })
-    msg += "<button class='walkability_btn'>Show Walkability</button>"
+
+    // Add the show walkability button (which when clicked renders a buffer around the point)
+    // only if buffer all is disabled
+
+    if (!buffer_all) {
+        msg += "<button class='walkability_btn'>Show Walkability</button>"
+    }
 
     // Display the pop up with a walkability option
     activePopUp = new mapboxgl.Popup()
@@ -356,13 +378,17 @@ function resetMap() {
         activePopUp = null;
     }
 
-    // Remove the buffer if it exists
-    if (map.getLayer('walkability_buffer_polygon'))
-    {
-        map.removeLayer('walkability_buffer_polygon');
-        map.removeSource('walkability_buffer_data');
+    // Remove the buffer if it exists (or update all buffers if in buffer all mode)
+    if (buffer_all) {
+        bufferAll();
     }
-
+    else {
+        if (map.getLayer('walkability_buffer_polygon'))
+        {
+            map.removeLayer('walkability_buffer_polygon');
+            map.removeSource('walkability_buffer_data');
+        }
+    }
 }
 
 // Filter third spaces by user generated substring
@@ -420,21 +446,96 @@ function changebufDist(buf_val) {
     // Change global buf dist
     buffer_dist = buf_val;
 
-    // Update rendered buffer (if it clearly exists on the map)
-    if (map.getLayer('walkability_buffer_polygon')) {
-        // work on code here
-        map.removeLayer('walkability_buffer_polygon');
-        map.removeSource('walkability_buffer_data');
+    if (buffer_all) {
+        bufferAll();
+    }
+    else {
 
-        let buffer = turf.buffer(curr_buf_point, buffer_dist, {units: "metres"})
-        console.log(buffer)
+        // Update rendered buffer (if it clearly exists on the map)
+        if (map.getLayer('walkability_buffer_polygon')) {
+            // work on code here
+            map.removeLayer('walkability_buffer_polygon');
+            map.removeSource('walkability_buffer_data');
 
-        // Add the data from the new user query to the map
-        map.addSource('walkability_buffer_data', {type: 'geojson',data: buffer});
+            let buffer = turf.buffer(curr_buf_point, buffer_dist, {units: "metres"})
+            console.log(buffer)
+
+            // Add the data from the new user query to the map
+            map.addSource('walkability_buffer_data', {type: 'geojson',data: buffer});
+            map.addLayer({
+                'id': 'walkability_buffer_polygon',
+                'type': 'fill',
+                'source': 'walkability_buffer_data',
+                'paint': {
+                    'fill-color': '#888888', // Test alternative colours and style properties
+                    'fill-opacity': 0.4,
+                    'fill-outline-color': 'black'
+                }
+            });
+        }
+    }
+}
+
+// Buffers all current points on the map (or disables them if buffer all points is disabled)
+function bufferAll() {
+    // Remove previous rendered buffer layer if it exists
+    if (map.getLayer('all_buffers_poly')) {
+        map.removeLayer('all_buffers_poly');
+        map.removeSource('all_buffers');
+    }
+
+    // Removes active pop up (if existent) on the map
+    if (activePopUp) {
+        activePopUp.remove();
+    }
+
+    // Check if the buffer all switch is on or off
+    let buffer_all_checkbox = document.getElementById('buffer_all_checkbox');
+
+    buffer_all = buffer_all_checkbox.checked === true;
+
+    if (buffer_all) {
+
+        // Initialize an array that will store the coordinates of visible points
+        let visible_point_coords = [];
+
+        // Looping through each of the third place ids, find which points are currently visible (based on type)
+        // and add their coordinates to the visible_point_coords_array
+        ids_to_locs.forEach((point_info) => {
+            // retrieve the type of the third place point
+            let type = point_info.type;
+
+            // if the point is a third place type that is currently on the map.
+            // add it to the coordinates of visible points array
+            if (visible_layers.includes(type)) {
+                visible_point_coords.push(point_info.coords)
+            }
+        })
+
+        console.log(visible_point_coords);
+
+        // Initialize array of buffers
+        let all_buffers = [];
+
+        // Loop through each visible point, creating a buffer for each
+        // Add each buffer to the buffers array, this data will be used to create the all buffers feature layer
+        for (let i = 0; i < visible_point_coords.length; i++) {
+            const coords = visible_point_coords[i];
+            const curr_buf_point = turf.point(coords);
+            const buffer = turf.buffer(curr_buf_point, buffer_dist, {units: "metres"});
+            all_buffers.push(buffer);
+        }
+        console.log(all_buffers);
+
+        // Store buffers in a GeoJSON object
+        let all_buffer_data = {"type": "FeatureCollection", "features": all_buffers}
+
+        // Add the buffers to the map
+        map.addSource('all_buffers', {type: 'geojson',data: all_buffer_data});
         map.addLayer({
-            'id': 'walkability_buffer_polygon',
+            'id': 'all_buffers_poly',
             'type': 'fill',
-            'source': 'walkability_buffer_data',
+            'source': 'all_buffers',
             'paint': {
                 'fill-color': '#888888', // Test alternative colours and style properties
                 'fill-opacity': 0.4,

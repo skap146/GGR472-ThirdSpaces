@@ -46,6 +46,9 @@
     are they easily accessible? Explore this map to find out!.</p>
 
   <!-- Searching for a third space functionality -->
+  <div class="container">
+  <div class="row">
+    <div class="col-8">
   <div class="container_third_space_dropdown">
     <div class="dropdown">
       <!-- Search bar (visible on init) -->
@@ -56,7 +59,18 @@
       </div>
     </div>
     <a class="btn btn-danger" id="enter_btn">Enter</a>
+    </div>
   </div>
+    <div class="col-4 flex-col">
+      <!-- Buffer all points slider -->
+      <p>Buffer All Points:</p>
+      <label class="switch">
+        <input id="buffer_all_checkbox" type="checkbox" onchange="bufferAll()">
+        <span class="all_pts_buffer_toggle round"></span>
+      </label>
+    </div>
+    </div>
+    </div>
 
 
   <!-- webpage map --->

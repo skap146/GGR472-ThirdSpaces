@@ -94,7 +94,7 @@ desired third place, press Enter. If it matches with the name of a third place p
 and automatically display it's pop-up. If not, then an alert is displayed that an invalid name was searched for and to try again with a valid name.
 See the below demonstration:
 
-[Third Place Search Demo](demos/third_place_search.mov)
+[Third Place Search Demo](demos/third_place_search.mp4)
 
 Finally, by turning on the "buffer all points" switch, you can buffer every visible point on the map at once. Under this setting, pop-ups are still 
 enabled, but the show walkability button does not display. In this mode, the buffers shown are affected by which third place layers are visible

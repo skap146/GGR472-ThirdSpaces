@@ -22,8 +22,6 @@ menu_btn.addEventListener("click", ()  => {
     // main page element
     let main = document.getElementById("main");
 
-    console.log(curr_menu_width);
-
     // show menu if currently hidden, hide menu if currently displayed
     if (curr_menu_width === 0)
     {

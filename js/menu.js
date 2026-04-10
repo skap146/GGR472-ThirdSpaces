@@ -11,6 +11,7 @@ function init_menu() {
     let sidebar = document.getElementById("sidebar");
     sidebar.style.width = pixel_width + "px";
     main.style.marginLeft = pixel_width + "px";
+    document.body.classList.add("menu-open"); // show controls in correct position on page load
 }
 
 
@@ -27,10 +28,12 @@ menu_btn.addEventListener("click", ()  => {
     {
         sidebar.style.width = pixel_width + "px";
         main.style.marginLeft = pixel_width + "px";
+        document.body.classList.add("menu-open"); // add class to trigger CSS for map control shifting
     }
     else
     {
         sidebar.style.width = 0 + "px";
         main.style.marginLeft = 0 + "px";
+        document.body.classList.remove("menu-open");
     }
 })

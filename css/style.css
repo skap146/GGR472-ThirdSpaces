@@ -26,6 +26,7 @@
 
 #main
 {
+    position: relative;
     transition: 0.5s; /* to match the menu transition */
 }
 /* menu format */
@@ -48,8 +49,7 @@
 }
 #menu_btn
 {
-    position: absolute;
-    /* left: 100%; */
+    position: fixed;
     top: 10px;
     transform: translateX(-10%); /* Adjust the position so button looks like a "pulltab" from menu */
 }
@@ -443,4 +443,21 @@ input:checked + .all_pts_buffer_toggle:before {
 .img_caption {
     font-size: 14px;
     font-family: ProximaNova-Bold, sans-serif;
+}
+
+/* ------------ MAP CONTROLS POSITIONING ---------------- */
+/* Shift Mapbox controls when menu is open */
+.mapboxgl-ctrl-top-right {
+    right: 10px;
+    top: 10px;
+    transition: right 0.5s;
+}
+
+.menu-open .mapboxgl-ctrl-top-right {
+    right: 210px; /* 200px menu + small buffer */
+}
+
+/* Prevent page from becoming wider than the viewport when #main shifts right */
+html, body {
+    overflow-x: hidden;
 }

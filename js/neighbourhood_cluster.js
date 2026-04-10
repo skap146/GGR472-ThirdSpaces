@@ -29,7 +29,7 @@ const choropleth_schemes = {'Cluster': [
         2, color_schemes['assorted'][1],
         3, color_schemes['assorted'][2],
         4, color_schemes['assorted'][3]
-    ], 'Third Spaces Per Capita': [
+    ], 'Third Places Per Capita': [
         'step',
         ['get', 'count_per_capita'],
         color_schemes['blues'][0],
@@ -61,7 +61,7 @@ const choropleth_schemes = {'Cluster': [
 // Legend titles and data
 const legend_titles =
     {'Cluster': 'Cluster',
-        'Third Spaces Per Capita': 'Third Spaces Per 1000',
+        'Third Places Per Capita': 'Third Spaces Per 1000',
         '% Visible Minority': '% Visible Minority',
         "% Obtained Bachelor's Degree": "% With Bachelor's Degree",
     'Median Income': 'Median Income'}
@@ -69,7 +69,7 @@ const legend_data = {'Cluster': [{'label': '1', 'colour': color_schemes['assorte
         {'label': '2', 'colour': color_schemes['assorted'][1]},
         {'label': '3', 'colour': color_schemes['assorted'][2]},
         {'label': '4', 'colour': color_schemes['assorted'][3]}],
-    'Third Spaces Per Capita': [{'label': '0 - 0.9', 'colour': color_schemes['blues'][0]},
+    'Third Places Per Capita': [{'label': '0 - 0.9', 'colour': color_schemes['blues'][0]},
         {'label': '0.9 - 1.8', 'colour': color_schemes['blues'][1]},
         {'label': '1.8 - 2.7', 'colour': color_schemes['blues'][2]},
         {'label': '2.7+', 'colour': color_schemes['blues'][3]}],
@@ -236,7 +236,7 @@ function updatePopUpInput(input_type) {
                 active_pop_up
                     .setLngLat(e.lngLat)
                     .setHTML(`<strong> Neighbourhood Name: </strong> ${neigh_name} 
-                        <br> <strong> Third Spaces Per Capita: </strong>${roundDecimals(count_per_capita, 2)}
+                        <br> <strong> Third Places Per Capita: </strong>${roundDecimals(count_per_capita, 2)}
                         <br> <strong> Median Income: </strong>  $${med_income}
                         <br> <strong> % Visible Minority: </strong> ${roundDecimals(visible_minority * 100, 0)}
                         <br> <strong> % Bachelor's Degrees: </strong> ${roundDecimals(bachelor_degs * 100, 0)}`)
@@ -269,7 +269,7 @@ function updatePopUpInput(input_type) {
 
                 active_pop_up.setLngLat(e.lngLat)
                     .setHTML(`<strong> Neighbourhood Name: </strong> ${neigh_name} </strong>
-                    <br> <strong> Third Spaces Per Capita: </strong>${roundDecimals(count_per_capita, 2)}
+                    <br> <strong> Third Places Per Capita: </strong>${roundDecimals(count_per_capita, 2)}
                     <br> <strong> Median Income: </strong>  $${med_income}
                     <br> <strong> % Visible Minority: </strong> ${roundDecimals(visible_minority * 100, 0)}
                     <br> <strong> % Bachelor's Degrees: </strong> ${roundDecimals(bachelor_degs * 100, 0)}`)

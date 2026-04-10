@@ -37,7 +37,9 @@
     z-index: 1; /* Stay on top */
     top: 0; /* Stay at the top */
     left: 0;
-    background-color: #eb6963; /* Light red */
+    /* background-color: #eb6963; Light red */
+    background-color: #0d6efd; 
+
     overflow-x: hidden; /* Disable horizontal scroll */
     padding-bottom: 30vh; /* Padding based on screen height */
     transition: 0.5s; /* 0.5 second transition effect for menu */
@@ -49,7 +51,9 @@
 #menu_btn
 {
     position: absolute;
-    top: 0;
+    /* left: 100%; */
+    top: 10px;
+    transform: translateX(-10%); /* Adjust the position so button looks like a "pulltab" from menu */
 }
 #menu_btn span
 {
@@ -62,12 +66,12 @@
 .menu_text
 {
     font-family: 'Montserrat', sans-serif;
-    color: black;
+    color: white;
 }
 .menu_link
 {
     text-decoration: none;
-    color: black;
+    color: white;
     font-family: 'Montserrat', sans-serif;
     display: block;
     padding: 10px 0;
@@ -75,7 +79,7 @@
 }
 .menu_link:hover
 {
-   color: #262626;
+   color: #cdcdcd;
 }
 
 /* ------------ WEBSITE TITLES STYLING ---------------- */

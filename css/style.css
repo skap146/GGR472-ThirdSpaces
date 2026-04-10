@@ -73,6 +73,7 @@
     display: block;
     padding: 10px 0;
     font-size: 18px;
+    white-space: nowrap;   /* prevents menu text from re-wrapping on open/close*/
 }
 .menu_link:hover
 {

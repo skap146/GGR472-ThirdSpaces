@@ -75,39 +75,6 @@
 
   <!-- webpage map --->
   <div id="my-map" class="map_container_third_place">
-    <!-- buffer distance slider -->
-    <div id="buffer_slider">
-      <h4 class="text-center ui_heading"> Buffer Distance: </h4>
-      <div class="slidecontainer">
-        <input type="range" min="200" max="1000" value="500" class="slider" id="bufRange" onchange="changebufDist(value)">
-      </div>
-      <p id="slider_msg">Current buffer distance: 500m <br> Within a 5 minute walk</p>
-    </div>
-
-    <!-- toggle/filter third space types -->
-    <div id="layer_toggle">
-      <h4 class="text-center ui_heading"> Layer Toggle </h4>
-      <label class="check">
-        <input type="checkbox" class="checkmark" value="library_point" onchange="toggleLayer(value)" checked>
-        <span class="box_lib"></span>
-        Libraries
-      </label><br>
-      <label class="check">
-        <input type="checkbox" class="checkmark" value="early_child_centre_point" onchange="toggleLayer(value)" checked>
-        <span class="box_earlyON"></span>
-        EarlyON Child Centres
-      </label><br>
-      <label class="check">
-        <input type="checkbox" class="checkmark" value="comm_centre_point" onchange="toggleLayer(value)" checked>
-        <span class="box_comm"></span>
-        Community Centres
-      </label ><br>
-      <label class="check">
-        <input type="checkbox" class="checkmark" value="places_of_worship_point" onchange="toggleLayer(value)" checked>
-        <span class="box_worship"></span>
-        Places of Worship
-      </label><br>
-    </div>
     </div>
 
   <!-- menu button -->
@@ -117,6 +84,40 @@
     <span></span>
   </div>
   </div>
+
+<!-- buffer distance slider -->
+<div id="buffer_slider">
+  <h4 class="text-center ui_heading"> Buffer Distance: </h4>
+  <div class="slidecontainer">
+    <input type="range" min="200" max="1000" value="500" class="slider" id="bufRange" onchange="changebufDist(value)">
+  </div>
+  <p id="slider_msg">Current buffer distance: 500m <br> Within a 5 minute walk</p>
+</div>
+
+<!-- toggle/filter third space types -->
+<div id="layer_toggle">
+  <h4 class="text-center ui_heading"> Layer Toggle </h4>
+  <label class="check">
+    <input type="checkbox" value="library_point" onchange="toggleLayer(value)" checked>
+    <span class="box_lib"></span>
+    Libraries
+  </label><br>
+  <label class="check">
+    <input type="checkbox" value="early_child_centre_point" onchange="toggleLayer(value)" checked>
+    <span class="box_earlyON"></span>
+    EarlyON Child Centres
+  </label><br>
+  <label class="check">
+    <input type="checkbox" value="comm_centre_point" onchange="toggleLayer(value)" checked>
+    <span class="box_comm"></span>
+    Community Centres
+  </label ><br>
+  <label class="check">
+    <input type="checkbox" value="places_of_worship_point" onchange="toggleLayer(value)" checked>
+    <span class="box_worship"></span>
+    Places of Worship
+  </label><br>
+</div>
 
 <!-- link to menu handler script -->
 <script src="js/menu.js"></script>

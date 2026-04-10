@@ -9,6 +9,7 @@
 
 /* ------------- WEBPAGE ATTRIBUTES --------------- */
 
+/* ------------- BACKGROUND COLORS ---------------- */
 
 /* bg colors */
 .bg-light-green {
@@ -21,6 +22,12 @@
     background-color: #fff4d4
 }
 
+/* ------------ MENU STYLING ---------------- */
+
+#main
+{
+    transition: 0.5s; /* to match the menu transition */
+}
 /* menu format */
 #sidebar
 {
@@ -39,22 +46,24 @@
     align-items: center;
     flex-direction: column;
 }
-
-/* menu button */
 #menu_btn
 {
     position: absolute;
     top: 0;
 }
-
-/* menu text */
+#menu_btn span
+{
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px 0;
+    background: white;
+}
 .menu_text
 {
     font-family: 'Montserrat', sans-serif;
     color: black;
 }
-
-/* menu links */
 .menu_link
 {
     text-decoration: none;
@@ -64,13 +73,12 @@
     padding: 10px 0;
     font-size: 18px;
 }
-/* menu links formatting on hover */
 .menu_link:hover
 {
    color: #262626;
 }
 
-/* all webpage titles */
+/* ------------ WEBSITE TITLES STYLING ---------------- */
 .background_pg_title
 {
     padding-top: 5vh;
@@ -90,7 +98,8 @@
     font-family: 'ProximaNova-Bold', sans-serif;
 }
 
-/* background page headings */
+/* ------------ BACKGROUND PAGE TEXT STYLING ---------------- */
+
 .background_pg_heading
 {
     font-size: 35px;
@@ -105,27 +114,12 @@
     padding-left: 15vh;
     padding-right: 15vh;
 }
-
-#menu_btn span
-{
-    display: block;
-    width: 25px;
-    height: 3px;
-    margin: 5px 0;
-    background: white;
-}
-
-/* description text formatting */
 .desc-text {
     font-size: 18px;
 }
 
-#main
-{
-    transition: 0.5s; /* to match the menu transition */
-}
 
-/* custom checkbox styling (with help of copilot) */
+/* -------------- CUSTOM STYLING: FOR LAYER TOGGLE (CUSTOM CHECKBOX) -------------- */
 .check input {
     display: none;
 }
@@ -190,16 +184,8 @@
     align-items: center;
     justify-content: center;
 }
-/* Title for dropdown menu styling */
-.dropdown-title
-{
-    color: black;
-    font-size: 14px;
-    white-space: nowrap;
-    padding-right: 10px;
-}
 
-/* legend styling and positioning */
+/* ------------ LEGEND (FOR CLUSTER ANALYSIS MAP) POSITIONING AND STYLING ---------------- */
 .legend {
     position: absolute;
     background-color: #fff;
@@ -224,7 +210,7 @@
     font-size: 16px;
 }
 
-/* cluster description styling and positioning */
+/* ------------ CLUSTER DESCRIPTION PANE + TOGGLE BUTTON POSITIONING AND STYLING ---------------- */
 #cluster-attributes {
     position: absolute;
     background-color: #fff;
@@ -250,8 +236,7 @@
     border-color: #a1a8a0;
 }
 
-/* Map positioning and sizing */
-/* Relative position used so the website is more functional when screen width/height changes */
+/* ------------ MAP CONTAINER POSITIONING AND STYLING ---------------- */
 .map_container
 {
     position: absolute;
@@ -286,7 +271,16 @@
     border-radius: 12px;
 }
 
-/* Dropdown positioning */
+
+
+/* ------------ THIRD PLACE SEARCH + DROPDOWN MENU STYLING AND POSITIONING ---------------- */
+.search_bar {
+    width: 400px;
+    height: 40px;
+    border-radius: 10px;
+    border-width: 1px;
+}
+
 .container_third_space_dropdown {
     margin: auto;
     justify-content: center;
@@ -295,17 +289,16 @@
     gap: 10px;
 }
 
-/* Search bar styling */
-.search_bar {
-    width: 400px;
-    height: 40px;
-    border-radius: 10px;
-    border-width: 1px;
-}
 
-/* Hide dropdown menu at first */
 .dropdown {
     position: relative;
+}
+.dropdown-title
+{
+    color: black;
+    font-size: 14px;
+    white-space: nowrap;
+    padding-right: 10px;
 }
 .dropdown-content {
     display: none;
@@ -325,18 +318,19 @@
     background-color: #2647c7;
     color: white;
 }
-
 /* Placeholder text styling */
 .placeholder {
     color: gray;
 }
 
+
+/* ------------ MAP UI ELEMENTS STYLING FOR THIRD SPACE MAP ---------------- */
 /* styling for map UI headers  */
 .ui_heading {
     font-size: 20px;
 }
 
-/* Buffer slide styling , making it round */
+/* ------------ BUFFER DISTANCE SLIDER STYLING ---------------- */
 .slider {
     -webkit-appearance: none;
     width: 100%;
@@ -349,7 +343,7 @@
     transition: opacity .2s;
 }
 
-/* All points buffer toggle switch positioning and styling */
+/* ------------ STYLING AND POSITIONING FOR BUFFER ALL POINTS TOGGLE SWITCH ---------------- */
 /* Credit to w3schools.com */
 /* The switch - the box around the slider */
 .switch {
@@ -366,7 +360,6 @@
     height: 0;
 }
 
-/* The slider */
 .all_pts_buffer_toggle {
     position: absolute;
     cursor: pointer;
@@ -419,7 +412,7 @@ input:checked + .all_pts_buffer_toggle:before {
     gap: 20px;
 }
 
-/* Background Image and Caption Formatting */
+/* ------------ BACKGROUND PAGE IMAGES AND CAPTIONS STYLING ---------------- */
 .img_center {
     display: block;
     margin: auto;

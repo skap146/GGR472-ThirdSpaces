@@ -82,19 +82,19 @@
 .background_pg_title
 {
     padding-top: 5vh;
-    font-size: 40px;
+    font-size: 30px;
     font-family: 'ProximaNova-Bold', sans-serif;
 }
-.third_space_pg_title
+.third_place_pg_title
 {
     padding-top: 5vh;
-    font-size: 35px;
+    font-size: 25px;
     font-family: 'ProximaNova-Bold', sans-serif;
 }
 .neighbourhood_pg_title
 {
     padding-top: 5vh;
-    font-size: 35px;
+    font-size: 25px;
     font-family: 'ProximaNova-Bold', sans-serif;
 }
 
@@ -117,8 +117,6 @@
 .desc-text {
     font-size: 18px;
 }
-
-
 /* -------------- CUSTOM STYLING: FOR LAYER TOGGLE (CUSTOM CHECKBOX) -------------- */
 .check input {
     display: none;
@@ -206,8 +204,11 @@
     margin-right: 5px;
     background-color: var(--legendcolor);
 }
+.legend-title {
+    font-size: 18px;
+}
 .legend-text {
-    font-size: 16px;
+    font-size: 14px;
 }
 
 /* ------------ CLUSTER DESCRIPTION PANE + TOGGLE BUTTON POSITIONING AND STYLING ---------------- */
@@ -223,8 +224,11 @@
     z-index: 100;
     opacity: 1;
 }
+#cluster-desc-title {
+    font-size: 18px;
+}
 .cluster-desc-text {
-    font-size: 14px;
+    font-size: 11px;
 }
 #cluster_desc_btn {
     background-color: #b0bfbe;
@@ -237,11 +241,19 @@
 }
 
 /* ------------ MAP CONTAINER POSITIONING AND STYLING ---------------- */
-.map_container
+.map_container_third_place
 {
     position: absolute;
     margin: auto;
     top: 250px;
+    margin-top: 5px;
+    bottom: 0;
+    width: 100%;
+}
+.map_container_cluster {
+    position: absolute;
+    margin: auto;
+    top: 220px;
     margin-top: 5px;
     bottom: 0;
     width: 100%;
@@ -281,7 +293,7 @@
     border-width: 1px;
 }
 
-.container_third_space_dropdown {
+.container_third_place_dropdown {
     margin: auto;
     justify-content: center;
     align-items: center;

@@ -28,7 +28,7 @@
 <div id="sidebar" class="side_menu">
   <h1 class="menu_text">Menu <br><br><br><br><br></h1>
   <a href="index.html" class="menu_link text-center">Background</a>
-  <a href="third_space_access.html" class="menu_link text-center">Third Space <br> Walkability Map</a>
+  <a href="third_place_access.html" class="menu_link text-center">Third Place <br> Walkability Map</a>
   <a href="neighbourhood_cluster.html" class="menu_link text-center">Neighbourhood <br> Cluster Map</a>
 </div>
 
@@ -58,7 +58,7 @@
         <label for="choropleth-variable" class="dropdown-title">Classify neighbourhoods by:</label>
         <select id="choropleth-variable" class="form-control" onchange="updateMap(value)">
           <option value="Cluster">Clusters</option>
-          <option value="Third Spaces Per Capita">Third Spaces Per Capita</option>
+          <option value="Third Places Per Capita">Third Places Per Capita</option>
           <option value="% Visible Minority">% Visible Minority</option>
           <option value="% Obtained Bachelor's Degree">% Obtained Bachelor's Degree</option>
           <option value="Median Income">Median Income</option>
@@ -74,7 +74,7 @@
 
 
   <!-- webpage map --->
-  <div id="my-map" class="map_container">
+  <div id="my-map" class="map_container_cluster">
     <!-- Add attributes for each cluster -->
     <!-- Add legend -->
     <div id='legend' class='legend'>

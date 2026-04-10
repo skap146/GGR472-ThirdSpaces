@@ -61,7 +61,7 @@ const choropleth_schemes = {'Cluster': [
 // Legend titles and data
 const legend_titles =
     {'Cluster': 'Cluster',
-        'Third Places Per Capita': 'Third Spaces Per 1000',
+        'Third Places Per Capita': 'Third Places Per 1000',
         '% Visible Minority': '% Visible Minority',
         "% Obtained Bachelor's Degree": "% With Bachelor's Degree",
     'Median Income': 'Median Income'}
@@ -78,9 +78,9 @@ const legend_data = {'Cluster': [{'label': '1', 'colour': color_schemes['assorte
         {'label': '76 - 96%', 'colour': color_schemes['purples'][2]},
         {'label': '> 96%', 'colour': color_schemes['purples'][3]}],
     "% Obtained Bachelor's Degree": [{'label': '0 - 25%', 'colour': color_schemes['greens'][0]},
-        {'label': '0 - 25%', 'colour': color_schemes['greens'][1]},
-        {'label': '25 - 41%', 'colour': color_schemes['greens'][2]},
-        {'label': '41 - 57%', 'colour': color_schemes['greens'][3]}],
+        {'label': '25 - 41%', 'colour': color_schemes['greens'][1]},
+        {'label': '41 - 57%', 'colour': color_schemes['greens'][2]},
+        {'label': '> 57%', 'colour': color_schemes['greens'][3]}],
     "Median Income": [{'label': '<$80,000', 'colour': color_schemes['blues'][0]},
         {'label': '$80,000-$108,000', 'colour': color_schemes['blues'][1]},
         {'label': '$108,000-$136,000', 'colour': color_schemes['blues'][2]},
@@ -107,26 +107,26 @@ Promise.all([
     fetch('data/tor_neighbourhoods_updated.geojson').then(response => response.json())])
     .then(([libraries, earlyON_centres, worship, comm_centres, neighbourhoods]) => {
 
-        const third_space_pts = [...libraries, ...earlyON_centres, ...worship, ...comm_centres];
-        let third_space_pts_geojson = {"type": "FeatureCollection", "features": third_space_pts};
+        const third_place_pts = [...libraries, ...earlyON_centres, ...worship, ...comm_centres];
+        let third_place_pts_geojson = {"type": "FeatureCollection", "features": third_place_pts};
 
         neighbourhoods.features.forEach((neighbourhood) => {
             neighbourhood.properties.median_income = +neighbourhood.properties.median_income;
         })
 
         // "aggregate" all third space points within each neighbourhood
-        let third_spaces_in_neighbourhoods = turf.collect(neighbourhoods, third_space_pts_geojson, '_id', 'values');
+        let third_places_in_neighbourhoods = turf.collect(neighbourhoods, third_place_pts_geojson, '_id', 'values');
 
-        third_spaces_in_neighbourhoods.features.forEach(neighbourhood => {
+        third_places_in_neighbourhoods.features.forEach(neighbourhood => {
             let count = neighbourhood.properties.values.length;
             neighbourhood.properties.count_per_capita = (count / neighbourhood.properties.total_pop) * 1000;
         })
 
         map.on('load', () =>
         {
-            console.log('third spaces in neighbourhoods: ', third_spaces_in_neighbourhoods);
+            console.log('third spaces in neighbourhoods: ', third_places_in_neighbourhoods);
             // Load external GeoJSON files
-            map.addSource('neighbourhoods_data', {type: 'geojson',data: third_spaces_in_neighbourhoods});
+            map.addSource('neighbourhoods_data', {type: 'geojson',data: third_places_in_neighbourhoods});
 
             map.addLayer({
                 'id': 'neighbourhoods_poly', // Create your own layer ID

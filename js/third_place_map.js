@@ -9,7 +9,7 @@ const avg_walk_speed = 1.3;
 let visible_layers = ['library_point', 'early_child_centre_point', 'comm_centre_point', 'places_of_worship_point']
 
 // third space dropdown element
-const dropdown_element = document.getElementById('third_space_dropdown');
+const dropdown_element = document.getElementById('third_place_dropdown');
 
 // current buffering distance (on load, it's 500)
 let buffer_dist = 500;
@@ -28,9 +28,9 @@ let id = 1;
 
 // Load all the third space data for the dropdown selector
 // names of third spaces and their coordinates
-let third_space_locs = new Map();
+let third_place_locs = new Map();
 // names of third spaces and their types
-let third_space_types = new Map();
+let third_place_types = new Map();
 // third place ids and their information
 let ids_to_locs = new Map();
 // third space point types and their field names
@@ -48,10 +48,10 @@ let type_to_fields = new Map([['library_point', [
     {'display_name': 'Address', 'field_name': 'ADDRESS_FULL'},
     {'display_name': 'Phone', 'field_name': 'FTH_PHONE'},
     {'display_name': 'Faith', 'field_name': 'FTH_FAITH'}]]]);
-load_third_space_dropdown()
+load_third_place_dropdown()
 
 // Add all third space elements to the dropdown menu
-function load_third_space_dropdown()
+function load_third_place_dropdown()
 {
     load_layer_in_dropdown('data/library.geojson', 'BranchName', 'library_point');
     load_layer_in_dropdown('data/EARLYONChildCentres.geojson', 'buildingName', 'early_child_centre_point');
@@ -72,10 +72,10 @@ function load_layer_in_dropdown(geoJSON, name_field, type)
 
             // current third space id (increment by 1 for each feature)
             features.forEach(feature => {
-                // append the name and loc of each feature to our third_space_locs
+                // append the name and loc of each feature to our third_place_locs
                 // include reference to type of third space
-                third_space_locs.set(feature.properties[name_field], feature)
-                third_space_types.set(feature.properties[name_field], type)
+                third_place_locs.set(feature.properties[name_field], feature)
+                third_place_types.set(feature.properties[name_field], type)
 
                 // a mapping of the feature's id and it's type and location, as a backup
                 // in case name is undefined
@@ -83,16 +83,16 @@ function load_layer_in_dropdown(geoJSON, name_field, type)
                 ids_to_locs.set(id, {type: type, coords: feature.geometry.coordinates})
 
                 // append to the dropdown (only if name is defined)
-                let third_space_option = document.createElement('div');
-                third_space_option.textContent = feature.properties[name_field];
-                third_space_option.value = feature.properties[name_field];
+                let third_place_option = document.createElement('div');
+                third_place_option.textContent = feature.properties[name_field];
+                third_place_option.value = feature.properties[name_field];
 
                 // saves the type of the third space (important for filtering later)
-                third_space_option.setAttribute("type", type);
+                third_place_option.setAttribute("type", type);
 
                 // add the third space element to the dropdown (but only if it has content, if null, do not add)
-                if (third_space_option.textContent) {
-                    dropdown_element.appendChild(third_space_option);
+                if (third_place_option.textContent) {
+                    dropdown_element.appendChild(third_place_option);
                 }
 
                 id++;
@@ -107,7 +107,7 @@ enter_btn.addEventListener('click', function(){
     let name = document.getElementById('user_input').value;
 
     // If name is not the name of a third place on the map, send an alert to the user and return
-    let feature = third_space_locs.get(name);
+    let feature = third_place_locs.get(name);
 
     if (!feature) {
         alert(`${name} is not currently a third place on the map. Please try again with a different name.`);
@@ -127,7 +127,7 @@ enter_btn.addEventListener('click', function(){
         };
 
         // Call the display pop up function
-        displayPopUp(syntheticEvent, type_to_fields.get(third_space_types.get(name)));
+        displayPopUp(syntheticEvent, type_to_fields.get(third_place_types.get(name)));
 
         // If the user clicks on the walkability button, displays walkability buffer around point
         activePopUp.getElement().querySelector('.walkability_btn').addEventListener('click', () => {
@@ -290,20 +290,21 @@ function toggleLayer(layer_id)
 
     // loop through all third space elements in dropdown selection, and only display
     // third space types that are visible on the map
+
     let children = dropdown_element.children;
     let length = children.length;
     for (let i = length - 1; i >= 0; i--) {
-        let third_space_elem = children[i];
+        let third_place_elem = children[i];
 
         // if this third space has become invisible on the map, remove it as a search option on the dropdown
         // otherwise, if visible on the map, ensure it is visible on the dropdown.
-        if (third_space_elem.getAttribute('type') === layer_id) {
+        if (third_place_elem.getAttribute('type') === layer_id) {
             if (curr_visibility === 'none')
             {
-                third_space_elem.style.display = 'none';
+                third_place_elem.style.display = 'none';
             }
             else {
-                third_space_elem.style.display = '';
+                third_place_elem.style.display = '';
             }
         }
     }
@@ -389,51 +390,6 @@ function resetMap() {
             map.removeSource('walkability_buffer_data');
         }
     }
-}
-
-// Filter third spaces by user generated substring
-// Keeps all third spaces in the dropdown menu that contain the user generated substring
-function searchThirdSpaces(user_str) {
-    console.log('1');
-    console.log(user_str);
-
-    // show the dropdown menu
-    dropdown_element.style.display = 'block';
-
-    // handle empty string case by "filtering for all"
-    if (!user_str) {
-        user_str = ' ';
-    }
-
-    // Loop through each element in the dropdown
-    let children = [...dropdown_element.children];
-    let length = children.length;
-    for (let i = length - 1; i >= 0; i--) {
-        let third_space_elem = children[i];
-
-        // Check if user string is in the element name and the element's type is a visible layer, if so keep it.
-        // Otherwise, delete.
-        // This process converts both strings to uppercase before testing since
-        // search should not be case-sensitive.
-        let third_space_name = third_space_elem.value;
-        let third_space_name_upper = third_space_name.toUpperCase();
-        let user_str_upper = user_str.toUpperCase()
-
-        if (third_space_name_upper.includes(user_str_upper) &&
-            visible_layers.includes(third_space_elem.getAttribute('type'))) {
-            third_space_elem.style.display = '';
-        }
-        else {
-            third_space_elem.style.display = 'none';
-        }
-    }
-}
-// When user clicks on dropdown element, set it as the current value in search bar
-function setThirdSpaceValue (event){
-    let value = event.target.value;
-    let user_input = document.getElementById('user_input');
-    user_input.value = value;
-    dropdown_element.style.display = 'none';
 }
 
 // React to change in buffer distance

@@ -43,10 +43,10 @@ This table shows all the important files involved in this application:
 | File Name                        |                                                      Description                                                       |
 |----------------------------------|:----------------------------------------------------------------------------------------------------------------------:|
 | ```menu.js```                    | Controls the menu logic (expanding and retracting the menu when the user clicks the menu button) for this application  |
-| ```third_space_map.js```         |                          Controls the interactive elements of the **Third Space Access** map                           |
+| ```third_place_map.js```         |                          Controls the interactive elements of the **Third Space Access** map                           |
 | ```neighbourhood_cluster.js```   |                        Controls the interactive elements of the **Neighbourhood Clusters** map                         |
 | ```index.html```                 |                              Controls the structure of the **Background** (landing) page                               |
-| ```third_space_access.html```    |                               Controls the structure of the **Third Space Access** page                                |
+| ```third_place_access.html```    |                               Controls the structure of the **Third Space Access** page                                |
 | ```neighbourhood_cluster.html``` |                             Controls the structure of the **Neighbourhood Clusters** page                              |
 | ```style.css```                  | Controls the styling of the website as well as the positioning of webpage elements (e.x. menu, buttons, legends, etc.) |
 

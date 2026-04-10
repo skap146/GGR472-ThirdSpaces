@@ -371,6 +371,10 @@ map.on('click', e => {const features = map.queryRenderedFeatures(e.point, {
     }
 )
 
+// Add map controls
+map.addControl(new mapboxgl.FullscreenControl(), 'top-right');
+map.addControl(new mapboxgl.NavigationControl(), 'top-right');
+
 // Filter third spaces by user generated substring
 // Keeps all third spaces in the dropdown menu that contain the user generated substring
 function searchThirdPlaces(user_str) {

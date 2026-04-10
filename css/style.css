@@ -37,9 +37,7 @@
     z-index: 1; /* Stay on top */
     top: 0; /* Stay at the top */
     left: 0;
-    /* background-color: #eb6963; Light red */
-    background-color: #0d6efd; 
-
+    background-color: #0d6efd; /* Bootstrap blue to match menu-btn */
     overflow-x: hidden; /* Disable horizontal scroll */
     padding-bottom: 30vh; /* Padding based on screen height */
     transition: 0.5s; /* 0.5 second transition effect for menu */

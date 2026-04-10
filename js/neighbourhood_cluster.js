@@ -98,6 +98,9 @@ function load_layer_pts(geoJSON)
         .then(data => data.features)
 }
 
+map.addControl(new mapboxgl.FullscreenControl(), 'top-right');
+map.addControl(new mapboxgl.NavigationControl(), 'top-right');
+
 // fetch third space points (for aggregation into our neighbourhood polygons)
 Promise.all([
     load_layer_pts('data/library.geojson'),

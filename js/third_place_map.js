@@ -371,6 +371,51 @@ map.on('click', e => {const features = map.queryRenderedFeatures(e.point, {
     }
 )
 
+// Filter third spaces by user generated substring
+// Keeps all third spaces in the dropdown menu that contain the user generated substring
+function searchThirdPlaces(user_str) {
+    console.log('1');
+    console.log(user_str);
+
+    // show the dropdown menu
+    dropdown_element.style.display = 'block';
+
+    // handle empty string case by "filtering for all"
+    if (!user_str) {
+        user_str = ' ';
+    }
+
+    // Loop through each element in the dropdown
+    let children = [...dropdown_element.children];
+    let length = children.length;
+    for (let i = length - 1; i >= 0; i--) {
+        let third_space_elem = children[i];
+
+        // Check if user string is in the element name and the element's type is a visible layer, if so keep it.
+        // Otherwise, delete.
+        // This process converts both strings to uppercase before testing since
+        // search should not be case-sensitive.
+        let third_space_name = third_space_elem.value;
+        let third_space_name_upper = third_space_name.toUpperCase();
+        let user_str_upper = user_str.toUpperCase()
+
+        if (third_space_name_upper.includes(user_str_upper) &&
+            visible_layers.includes(third_space_elem.getAttribute('type'))) {
+            third_space_elem.style.display = '';
+        }
+        else {
+            third_space_elem.style.display = 'none';
+        }
+    }
+}
+// When user clicks on dropdown element, set it as the current value in search bar
+function setThirdPlaceValue (event){
+    let value = event.target.value;
+    let user_input = document.getElementById('user_input');
+    user_input.value = value;
+    dropdown_element.style.display = 'none';
+}
+
 // Removes the active pop up from the map
 function resetMap() {
     // If active pop up exists, remove and set to null

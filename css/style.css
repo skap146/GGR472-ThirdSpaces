@@ -235,6 +235,26 @@
 .cluster-desc-text {
     font-size: 11px;
 }
+
+/* cluster description rows with colour box */
+.cluster-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 6px;
+}
+
+/* coloured square beside each cluster description */
+.cluster-color {
+    width: 12px;
+    height: 12px;
+    display: inline-block;
+    border-radius: 2px;
+    flex-shrink: 0;
+    margin-top: 4px; /* aligns square with first line of text */
+}
+
+/* Toggle button styling */
 #cluster_desc_btn {
     background-color: #b0bfbe;
     border-color: #b0bfbe;

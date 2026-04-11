@@ -156,8 +156,17 @@ Promise.all([
             // set up default pop-up display type (on click)
             updatePopUpInput('On Click');
 
-            // initialize the legend upon load
-            initLegend(legend_data['Cluster'], legend_titles['Cluster'])
+            // initialize legend rows in the background so non-cluster classifications work later
+            initLegend(legend_data['Cluster'], legend_titles['Cluster']);
+
+            // but hide the standalone legend on first load because default view is Cluster
+            document.getElementById('legend').style.display = 'none';
+
+            // show cluster attributes UI on first load
+            document.getElementById('cluster-attributes').style.display = 'block';
+            document.getElementById('cluster_desc_btn').style.display = 'inline-block';
+            document.getElementById('cluster_desc_btn').textContent = 'Hide Cluster Attributes';
+            document.getElementById('cluster-attributes').style.opacity = '1';
         })
     })
 

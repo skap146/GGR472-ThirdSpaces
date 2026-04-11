@@ -331,6 +331,14 @@ map.on('mouseleave', 'neighbourhoods_poly', () => {
     }
 });
 
+// Event listener to change cursor visibility
+map.on('mouseenter', 'neighbourhoods_poly', () => {
+    map.getCanvas().style.cursor = 'pointer';
+});
+map.on('mouseleave', 'neighbourhoods_poly', () => {
+    map.getCanvas().style.cursor = '';
+});
+
 // Add an event listener to toggle on/off the cluster description
 let cluster_btn = document.getElementById('cluster_desc_btn');
 cluster_btn.addEventListener('click', (e) => {

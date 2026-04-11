@@ -1,6 +1,26 @@
 // menu pixel width when open
 const pixel_width = 200;
 
+//Update Mapbox control position based on menu + fullscreen state
+function updateMapControlsPosition() {
+    const controls = document.querySelector('.mapboxgl-ctrl-top-right');
+    if (!controls) return;
+
+    if (document.fullscreenElement) {
+        controls.style.transition = 'none';
+        controls.style.right = '10px';
+        return;
+    }
+
+    controls.style.transition = 'right 0.5s';
+
+    if (document.body.classList.contains('menu-open')) {
+        controls.style.right = pixel_width + 'px';
+    } else {
+        controls.style.right = '10px';
+    }
+}
+
 // respond to menu button upon click
 const menu_btn = document.getElementById("menu_btn");
 
@@ -40,22 +60,12 @@ menu_btn.addEventListener("click", ()  => {
 
 // adjust map controls in both maps when entering/exiting fullscreen mode (previously floating when menu open)
 document.addEventListener('fullscreenchange', () => {
+    updateMapControlsPosition();
+
     const controls = document.querySelector('.mapboxgl-ctrl-top-right');
     if (!controls) return;
 
-    if (document.fullscreenElement) {
-        controls.style.transition = 'none';   // stop transition
-        controls.style.right = '10px';        // place in corner
-    } else {
-        controls.style.transition = 'none';   // stop transition
-
-        if (document.body.classList.contains('menu-open')) {
-            controls.style.right = '210px';
-        } else {
-            controls.style.right = '10px';
-        }
-
-        // re-enable transition after position is set
+    if (!document.fullscreenElement) {
         setTimeout(() => {
             controls.style.transition = 'right 0.5s';
         }, 0);

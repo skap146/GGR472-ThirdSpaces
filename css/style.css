@@ -226,7 +226,7 @@
     margin-bottom: 20px;
     font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
     padding: 10px;
-    left: 20px;
+    right: 20px;
     z-index: 100;
     opacity: 1;
 }
@@ -479,6 +479,8 @@ input:checked + .all_pts_buffer_toggle:before {
 }
 
 /* Prevent page from becoming wider than the viewport when #main shifts right */
+/* no horizontal scrolling */
 html, body {
     overflow-x: hidden;
 }
+

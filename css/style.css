@@ -478,7 +478,7 @@ input:checked + .all_pts_buffer_toggle:before {
 
 /* Prevent page from becoming wider than the viewport when #main shifts right */
 /* no horizontal scrolling */
-/*html, body {*/
-/*    overflow-x: hidden;*/
-/*}*/
+body {
+    overflow-x: hidden;
+}
 

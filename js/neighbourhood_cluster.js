@@ -269,10 +269,12 @@ function updatePopUpInput(input_type) {
                 const visible_minority = e.feature.properties.visible_minority_prop;
                 const bachelor_degs = e.feature.properties.bachelor_deg_prop;
                 const neigh_name = e.feature.properties.AREA_NA7;
+                const cluster_id = e.feature.properties["Cluster ID"];
 
                 active_pop_up
                     .setLngLat(e.lngLat)
-                    .setHTML(`<strong> Neighbourhood Name: </strong> ${neigh_name} 
+                    .setHTML(`<strong> Cluster: </strong> ${cluster_id} 
+<br> <strong> Neighbourhood Name: </strong> ${neigh_name} 
                         <br> <strong> Third Places Per Capita: </strong>${roundDecimals(count_per_capita, 2)}
                         <br> <strong> Median Income: </strong>  $${med_income}
                         <br> <strong> % Visible Minority: </strong> ${roundDecimals(visible_minority * 100, 0)}

@@ -371,7 +371,7 @@ map.on('click', e => {const features = map.queryRenderedFeatures(e.point, {
     }
 )
 
-// Add map controls
+ // Add map controls
 map.addControl(new mapboxgl.FullscreenControl(), 'top-right');
 map.addControl(new mapboxgl.NavigationControl(), 'top-right');
 

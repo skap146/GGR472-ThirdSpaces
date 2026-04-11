@@ -37,3 +37,27 @@ menu_btn.addEventListener("click", ()  => {
         document.body.classList.remove("menu-open");
     }
 })
+
+// adjust map controls in both maps when entering/exiting fullscreen mode (previously floating when menu open)
+document.addEventListener('fullscreenchange', () => {
+    const controls = document.querySelector('.mapboxgl-ctrl-top-right');
+    if (!controls) return;
+
+    if (document.fullscreenElement) {
+        controls.style.transition = 'none';   // stop transition
+        controls.style.right = '10px';        // place in corner
+    } else {
+        controls.style.transition = 'none';   // stop transition
+
+        if (document.body.classList.contains('menu-open')) {
+            controls.style.right = '210px';
+        } else {
+            controls.style.right = '10px';
+        }
+
+        // re-enable transition after position is set
+        setTimeout(() => {
+            controls.style.transition = 'right 0.5s';
+        }, 0);
+    }
+});

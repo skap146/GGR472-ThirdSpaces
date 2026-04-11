@@ -179,13 +179,14 @@
     opacity: 0.7;
 }
 
-/* Form group styling */
+/* Form group styling (dropdown) */
 .form-group {
     margin: auto;
     display: flex;
     width: 80%;
     align-items: center;
     justify-content: center;
+    padding-bottom: 4px; /* Padding to prevent border highlight cut-off */
 }
 
 /* ------------ LEGEND (FOR CLUSTER ANALYSIS MAP) POSITIONING AND STYLING ---------------- */

@@ -37,7 +37,7 @@
     z-index: 1; /* Stay on top */
     top: 0; /* Stay at the top */
     left: 0;
-    background-color: #eb6963; /* Light red */
+    background-color: #0d6efd; /* Bootstrap blue to match menu-btn */
     overflow-x: hidden; /* Disable horizontal scroll */
     padding-bottom: 30vh; /* Padding based on screen height */
     transition: 0.5s; /* 0.5 second transition effect for menu */
@@ -48,8 +48,9 @@
 }
 #menu_btn
 {
-    position: absolute;
-    top: 0;
+    position: fixed;
+    top: 10px;
+    transform: translateX(-10%); /* Adjust the position so button looks like a "pulltab" from menu */
 }
 #menu_btn span
 {
@@ -62,20 +63,21 @@
 .menu_text
 {
     font-family: 'Montserrat', sans-serif;
-    color: black;
+    color: white;
 }
 .menu_link
 {
     text-decoration: none;
-    color: black;
+    color: white;
     font-family: 'Montserrat', sans-serif;
     display: block;
     padding: 10px 0;
     font-size: 18px;
+    white-space: nowrap;   /* prevents menu text from re-wrapping on open/close*/
 }
 .menu_link:hover
 {
-   color: #262626;
+   color: #cdcdcd;
 }
 
 /* ------------ WEBSITE TITLES STYLING ---------------- */
@@ -177,13 +179,14 @@
     opacity: 0.7;
 }
 
-/* Form group styling */
+/* Form group styling (dropdown) */
 .form-group {
     margin: auto;
     display: flex;
     width: 80%;
     align-items: center;
     justify-content: center;
+    padding-bottom: 4px; /* Padding to prevent border highlight cut-off */
 }
 
 /* ------------ LEGEND (FOR CLUSTER ANALYSIS MAP) POSITIONING AND STYLING ---------------- */
@@ -223,7 +226,7 @@
     margin-bottom: 20px;
     font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
     padding: 10px;
-    left: 20px;
+    right: 20px;
     z-index: 100;
     opacity: 1;
 }
@@ -233,6 +236,26 @@
 .cluster-desc-text {
     font-size: 11px;
 }
+
+/* cluster description rows with colour box */
+.cluster-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 6px;
+}
+
+/* coloured square beside each cluster description */
+.cluster-color {
+    width: 12px;
+    height: 12px;
+    display: inline-block;
+    border-radius: 2px;
+    flex-shrink: 0;
+    margin-top: 4px; /* aligns square with first line of text */
+}
+
+/* Toggle button styling */
 #cluster_desc_btn {
     background-color: #b0bfbe;
     border-color: #b0bfbe;
@@ -442,3 +465,22 @@ input:checked + .all_pts_buffer_toggle:before {
     font-size: 14px;
     font-family: ProximaNova-Bold, sans-serif;
 }
+
+/* ------------ MAP CONTROLS POSITIONING ---------------- */
+/* Shift Mapbox controls when menu is open */
+.mapboxgl-ctrl-top-right {
+    right: 10px;
+    top: 10px;
+    transition: right 0.5s;
+}
+
+.menu-open .mapboxgl-ctrl-top-right {
+    right: 210px; /* 200px menu + small buffer */
+}
+
+/* Prevent page from becoming wider than the viewport when #main shifts right */
+/* no horizontal scrolling */
+html, body {
+    overflow-x: hidden;
+}
+

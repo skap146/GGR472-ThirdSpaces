@@ -5,24 +5,31 @@ mapboxgl.accessToken = 'pk.eyJ1Ijoia2FwY2Fuc2giLCJhIjoiY21rNDRqY3NyMDN6OTNlb2p0M
 const map = new mapboxgl.Map({
     container: 'my-map', // map container ID
     style: 'mapbox://styles/mapbox/standard', // style URL
-    config: {basemap: {
+    config: {
+        basemap: {
             lightPreset: "morning",
             theme: "faded",
-            showRoadLabels: false, showPlaceLabels: false},
-        show3dObjects: false},
-    center: [-79.39, 43.66], // starting position [lng, lat] - centered in Toronto
-    zoom: 12}) // starting zoom level
+            showRoadLabels: false, showPlaceLabels: false
+        },
+        show3dObjects: false
+    },
+    center: [-79.31, 43.72], // starting position [lng, lat] - centered in Toronto
+    zoom: 10
+}) // starting zoom level
 
 // Initialize a variable to store the current pop up
 let active_pop_up = new mapboxgl.Popup();
 
 // Color schemes
-const color_schemes = {blues: ['#8d8ddd', '#4f4fed', '#2222fd', '#0303a6'],
-purples: ['#a076f3', '#8636ff', '#6419ff', '#4204ac'],
-greens: ['#c4f3af', '#88f676', '#36ba1c', '#167507'],
-assorted: ['#37b100', '#b17300', '#b10000', '#0348b6']}
+const color_schemes = {
+    blues: ['#8d8ddd', '#4f4fed', '#2222fd', '#0303a6'],
+    purples: ['#a076f3', '#8636ff', '#6419ff', '#4204ac'],
+    greens: ['#c4f3af', '#88f676', '#36ba1c', '#167507'],
+    assorted: ['#37b100', '#b17300', '#b10000', '#0348b6']
+}
 // Choropleth schemes
-const choropleth_schemes = {'Cluster': [
+const choropleth_schemes = {
+    'Cluster': [
         'step',
         ['get', 'Cluster ID'],
         color_schemes['assorted'][0],
@@ -57,46 +64,54 @@ const choropleth_schemes = {'Cluster': [
         80000, color_schemes['blues'][1],
         108000, color_schemes['blues'][2],
         136000, color_schemes['blues'][3]
-    ]}
+    ]
+}
 // Legend titles and data
 const legend_titles =
-    {'Cluster': 'Cluster',
-        'Third Places Per Capita': 'Third Places Per 1000',
-        '% Visible Minority': '% Visible Minority',
-        "% Obtained Bachelor's Degree": "% With Bachelor's Degree",
-    'Median Income': 'Median Income'}
-const legend_data = {'Cluster': [{'label': '1', 'colour': color_schemes['assorted'][0]},
-        {'label': '2', 'colour': color_schemes['assorted'][1]},
-        {'label': '3', 'colour': color_schemes['assorted'][2]},
-        {'label': '4', 'colour': color_schemes['assorted'][3]}],
-    'Third Places Per Capita': [{'label': '0 - 0.9', 'colour': color_schemes['blues'][0]},
-        {'label': '0.9 - 1.8', 'colour': color_schemes['blues'][1]},
-        {'label': '1.8 - 2.7', 'colour': color_schemes['blues'][2]},
-        {'label': '2.7+', 'colour': color_schemes['blues'][3]}],
-    '% Visible Minority':  [{'label': '0 - 55%', 'colour': color_schemes['purples'][0]},
-        {'label': '55 - 76%', 'colour': color_schemes['purples'][1]},
-        {'label': '76 - 96%', 'colour': color_schemes['purples'][2]},
-        {'label': '> 96%', 'colour': color_schemes['purples'][3]}],
-    "% Obtained Bachelor's Degree": [{'label': '0 - 25%', 'colour': color_schemes['greens'][0]},
-        {'label': '25 - 41%', 'colour': color_schemes['greens'][1]},
-        {'label': '41 - 57%', 'colour': color_schemes['greens'][2]},
-        {'label': '> 57%', 'colour': color_schemes['greens'][3]}],
-    "Median Income": [{'label': '<$80,000', 'colour': color_schemes['blues'][0]},
-        {'label': '$80,000-$108,000', 'colour': color_schemes['blues'][1]},
-        {'label': '$108,000-$136,000', 'colour': color_schemes['blues'][2]},
-        {'label': '$136,000+', 'colour': color_schemes['blues'][3]}]}
+{
+    'Cluster': 'Cluster',
+    'Third Places Per Capita': 'Third Places Per 1000',
+    '% Visible Minority': '% Visible Minority',
+    "% Obtained Bachelor's Degree": "% With Bachelor's Degree",
+    'Median Income': 'Median Income'
+}
+const legend_data = {
+    'Cluster': [{ 'label': '1', 'colour': color_schemes['assorted'][0] },
+    { 'label': '2', 'colour': color_schemes['assorted'][1] },
+    { 'label': '3', 'colour': color_schemes['assorted'][2] },
+    { 'label': '4', 'colour': color_schemes['assorted'][3] }],
+    'Third Places Per Capita': [{ 'label': '0 - 0.9', 'colour': color_schemes['blues'][0] },
+    { 'label': '0.9 - 1.8', 'colour': color_schemes['blues'][1] },
+    { 'label': '1.8 - 2.7', 'colour': color_schemes['blues'][2] },
+    { 'label': '2.7+', 'colour': color_schemes['blues'][3] }],
+    '% Visible Minority': [{ 'label': '0 - 55%', 'colour': color_schemes['purples'][0] },
+    { 'label': '55 - 76%', 'colour': color_schemes['purples'][1] },
+    { 'label': '76 - 96%', 'colour': color_schemes['purples'][2] },
+    { 'label': '> 96%', 'colour': color_schemes['purples'][3] }],
+    "% Obtained Bachelor's Degree": [{ 'label': '0 - 25%', 'colour': color_schemes['greens'][0] },
+    { 'label': '25 - 41%', 'colour': color_schemes['greens'][1] },
+    { 'label': '41 - 57%', 'colour': color_schemes['greens'][2] },
+    { 'label': '> 57%', 'colour': color_schemes['greens'][3] }],
+    "Median Income": [{ 'label': '<$80,000', 'colour': color_schemes['blues'][0] },
+    { 'label': '$80,000-$108,000', 'colour': color_schemes['blues'][1] },
+    { 'label': '$108,000-$136,000', 'colour': color_schemes['blues'][2] },
+    { 'label': '$136,000+', 'colour': color_schemes['blues'][3] }]
+}
 
 // whether the map is in hover mode or not (default false)
 let hovering = false;
 
 // load_layer_pts
-function load_layer_pts(geoJSON)
-{
+function load_layer_pts(geoJSON) {
     // fetches our file
     return fetch(geoJSON)
         .then(response => response.json())
         .then(data => data.features)
 }
+
+// Add map controls
+map.addControl(new mapboxgl.FullscreenControl(), 'top-right');
+map.addControl(new mapboxgl.NavigationControl(), 'top-right');
 
 // fetch third space points (for aggregation into our neighbourhood polygons)
 Promise.all([
@@ -108,7 +123,7 @@ Promise.all([
     .then(([libraries, earlyON_centres, worship, comm_centres, neighbourhoods]) => {
 
         const third_place_pts = [...libraries, ...earlyON_centres, ...worship, ...comm_centres];
-        let third_place_pts_geojson = {"type": "FeatureCollection", "features": third_place_pts};
+        let third_place_pts_geojson = { "type": "FeatureCollection", "features": third_place_pts };
 
         neighbourhoods.features.forEach((neighbourhood) => {
             neighbourhood.properties.median_income = +neighbourhood.properties.median_income;
@@ -122,11 +137,10 @@ Promise.all([
             neighbourhood.properties.count_per_capita = (count / neighbourhood.properties.total_pop) * 1000;
         })
 
-        map.on('load', () =>
-        {
+        map.on('load', () => {
             console.log('third spaces in neighbourhoods: ', third_places_in_neighbourhoods);
             // Load external GeoJSON files
-            map.addSource('neighbourhoods_data', {type: 'geojson',data: third_places_in_neighbourhoods});
+            map.addSource('neighbourhoods_data', { type: 'geojson', data: third_places_in_neighbourhoods });
 
             map.addLayer({
                 'id': 'neighbourhoods_poly', // Create your own layer ID
@@ -136,24 +150,47 @@ Promise.all([
                     'fill-color': choropleth_schemes['Cluster'],
                     'fill-outline-color': '#000000',
                     'fill-opacity': 1
-                }})
+                }
+            })
 
             // set up default pop-up display type (on click)
             updatePopUpInput('On Click');
 
-            // initialize the legend upon load
-            initLegend(legend_data['Cluster'], legend_titles['Cluster'])
+            // initialize legend rows in the background (hidden)
+            initLegend(legend_data['Cluster'], legend_titles['Cluster']);
+
+            // hide the standalone legend on first load because default view is Cluster
+            document.getElementById('legend').style.display = 'none';
+
+            // show cluster attributes UI on first load
+            document.getElementById('cluster-attributes').style.display = 'block';
+            document.getElementById('cluster_desc_btn').style.display = 'inline-block';
+            document.getElementById('cluster_desc_btn').textContent = 'Hide Cluster Attributes';
+            document.getElementById('cluster-attributes').style.opacity = '1';
         })
-})
+    })
 
 // updates the map based on user selected neighbourhood classification
 function updateMap(classification_value) {
-        map.setPaintProperty('neighbourhoods_poly', 'fill-color', choropleth_schemes[classification_value]);
+    map.setPaintProperty('neighbourhoods_poly', 'fill-color', choropleth_schemes[classification_value]);
+    
+    const legend = document.getElementById('legend');
+    const clusterBox = document.getElementById('cluster-attributes');
+    const clusterBtn = document.getElementById('cluster_desc_btn');
+
+    if (classification_value === 'Cluster') {
+        legend.style.display = 'none';          // hide separate legend for cluster view
+        clusterBox.style.display = 'block';     // show cluster attributes box
+        clusterBtn.style.display = 'inline-block'; // show toggle button only for cluster view
+    } else {
+        legend.style.display = 'block';         // show legend for non-cluster views
+        clusterBox.style.display = 'none';      // hide cluster attributes box
+        clusterBtn.style.display = 'none';      // hide toggle button when not in cluster view
         updateLegend(legend_data[classification_value], legend_titles[classification_value]);
+    }
 }
 // initialize the map legend
-function initLegend(legend_data, title)
-{
+function initLegend(legend_data, title) {
     // For each array item create a row to put the label and colour in
     legend_data.forEach(({ label, colour }) => {
         let legend_title = document.getElementById("legend-title");
@@ -186,7 +223,7 @@ function updateLegend(legend_items, title) {
 
     let index = 0;
 
-    legend_items.forEach(({label, colour}) => {
+    legend_items.forEach(({ label, colour }) => {
         // Update both colour and text elements with the new data
         let legend_row = legend_rows[index]
         let text_row = text_rows[index]
@@ -224,7 +261,7 @@ function updatePopUpInput(input_type) {
         // add on click pop up interaction
         map.addInteraction('neighbourhoods-interaction', {
             type: 'click',
-            target: {'layerId': 'neighbourhoods_poly'},
+            target: { 'layerId': 'neighbourhoods_poly' },
             handler: (e) => {
 
                 const count_per_capita = e.feature.properties.count_per_capita;
@@ -257,7 +294,7 @@ function updatePopUpInput(input_type) {
 
         map.addInteraction('neighbourhoods-interaction', {
             type: 'mousemove',
-            target: {'layerId': 'neighbourhoods_poly'},
+            target: { 'layerId': 'neighbourhoods_poly' },
             handler: (e) => {
                 // create pop up as soon as mouse enters a neighbourhood
                 const count_per_capita = e.feature.properties.count_per_capita;

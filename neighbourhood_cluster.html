@@ -71,21 +71,47 @@
 
   </div></div>
 
+<!-- webpage map -->
+<div id="my-map" class="map_container_cluster">
+</div>
 
+<!-- Cluster attributes box (moved OUTSIDE map container) -->
+<div id="cluster-attributes">
+  <h3 id="cluster-desc-title">Cluster Attributes</h3>
 
-  <!-- webpage map --->
-  <div id="my-map" class="map_container_cluster">
-    <!-- Add attributes for each cluster -->
-    <div id="cluster-attributes">
-      <h3 id="cluster-desc-title">Cluster Attributes</h3>
-      <span class='cluster-desc-text'> Cluster 1: lowest % with bachelor's degree, lowest third spaces per capita, <br> low median income, highest % visible minority <br></span>
-      <span class='cluster-desc-text'>Cluster 2: highest % with bachelor's degree, highest third spaces per capita, <br> high median income, lowest % visible minority<br></span>
-      <span class='cluster-desc-text'>Cluster 3: high % with bachelor's degree, high third spaces per capita, <br> highest median income, low % visible minority <br></span>
-      <span class='cluster-desc-text'>Cluster 4: low % with bachelor's degree, low third spaces per capita, <br> lowest median income, high % visible minority</span>
-    </div>
+  <div class="cluster-row">
+    <span class="cluster-color" style="background:#37b100;"></span>
+    <span class="cluster-desc-text">
+      Cluster 1: lowest % with bachelor's degree, lowest third places per capita,
+      low median income, highest % visible minority
+    </span>
   </div>
 
+  <div class="cluster-row">
+    <span class="cluster-color" style="background:#b17300;"></span>
+    <span class="cluster-desc-text">
+      Cluster 2: highest % with bachelor's degree, highest third places per capita,
+      high median income, lowest % visible minority
+    </span>
+  </div>
 
+  <div class="cluster-row">
+    <span class="cluster-color" style="background:#b10000;"></span>
+    <span class="cluster-desc-text">
+      Cluster 3: high % with bachelor's degree, high third places per capita,
+      highest median income, low % visible minority
+    </span>
+  </div>
+
+  <div class="cluster-row">
+    <span class="cluster-color" style="background:#0348b6;"></span>
+    <span class="cluster-desc-text">
+      Cluster 4: low % with bachelor's degree, low third places per capita,
+      lowest median income, high % visible minority
+    </span>
+  </div>
+</div>
+  
   <!-- menu button -->
   <div class="btn btn-primary" id="menu_btn">
     <span></span>
@@ -99,7 +125,7 @@
 <!-- Add legend -->
 <div id='legend' class='legend'>
   <h3 class="legend-title" id="legend-title"></h3>
-</div>
+</div> 
 
 <!-- link to menu handler script -->
 <script src="js/menu.js"></script>

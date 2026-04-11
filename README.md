@@ -1,12 +1,12 @@
 # Introduction
 
-Welcome to **Third Spaces Inc.**!
+Welcome to **Third Places Inc.**!
 
 Our organization's mission is to raise awareness regarding the importance of third place access throughout the city of Toronto.
 
 Third places refer to venues where people congregate for causal socialization outside a home (first place) or school/workplace (second place).
 
-In this project there are two maps, the main map is called **Third Space Access** and the
+In this project there are two maps, the main map is called **Third Place Access** and the
 bonus map is called **Neighbourhood Clusters**. Proceed to the **How to Use** section to learn more about these maps!
 
 
@@ -43,10 +43,10 @@ This table shows all the important files involved in this application:
 | File Name                        |                                                      Description                                                       |
 |----------------------------------|:----------------------------------------------------------------------------------------------------------------------:|
 | ```menu.js```                    | Controls the menu logic (expanding and retracting the menu when the user clicks the menu button) for this application  |
-| ```third_place_map.js```         |                          Controls the interactive elements of the **Third Space Access** map                           |
+| ```third_place_map.js```         |                          Controls the interactive elements of the **Third Place Access** map                           |
 | ```neighbourhood_cluster.js```   |                        Controls the interactive elements of the **Neighbourhood Clusters** map                         |
 | ```index.html```                 |                              Controls the structure of the **Background** (landing) page                               |
-| ```third_place_access.html```    |                               Controls the structure of the **Third Space Access** page                                |
+| ```third_place_access.html```    |                               Controls the structure of the **Third Place Access** page                                |
 | ```neighbourhood_cluster.html``` |                             Controls the structure of the **Neighbourhood Clusters** page                              |
 | ```style.css```                  | Controls the styling of the website as well as the positioning of webpage elements (e.x. menu, buttons, legends, etc.) |
 
@@ -61,12 +61,12 @@ When on screen, click the menu button again to retract the menu.
 
 ## The Background Page
 
-The background page defines third places, why they are significant, and the rationale behind the **Third Spaces Inc.* application. You can click on the 
+The background page defines third places, why they are significant, and the rationale behind the **Third Places Inc.* application. You can click on the 
 references at the bottom of the page for more expository information on the topic.
 
-## Third Space Map
+## Third Place Map
 
-The **Third Space Map** is intended to help users learn about the distribution of third places throughout Toronto, and the accessibility of third places in their 
+The **Third Place Map** is intended to help users learn about the distribution of third places throughout Toronto, and the accessibility of third places in their 
 area (if they reside in or near Toronto). The map contains colored points. Each point color represents a different type of third place, which the ```layer toggle``` legend 
 explains. By default, all third place types are toggled on. However, at any time, the user can toggle on/off third place layers. See the below images for examples:
 
@@ -74,7 +74,7 @@ explains. By default, all third place types are toggled on. However, at any time
 |:------------------------------:|:--------------------------------------------:|
 | ![Default](images/default.png) | ![Libraries Only](images/libraries_only.png) |
 
-Click on any point on the map to learn more about that specific third space. Once the pop-up renders, you can either close the pop-up 
+Click on any point on the map to learn more about that specific third place. Once the pop-up renders, you can either close the pop-up 
 or click the ```Show Walkability``` button, which will display a buffer around the point. This removes the pop-up.
 
 |                  Third Place Pop Up                  |                        Third Place Walkability Buffer                        |
@@ -107,7 +107,7 @@ Toronto is divided into it's 158 neighbourhoods. The main display option is the 
 the common characteristics of neighbourhoods in each cluster is displayed on the bottom left corner of the map. However, these characteristics can be 
 hidden/displayed at any time by clicking on the ```Hide/Show Cluster Attributes``` button.
 
-This map features additional customizability options. Each neighbourhood has a pop-up which displays it's name, third spaces per 1000 residents, and 
+This map features additional customizability options. Each neighbourhood has a pop-up which displays it's name, third places per 1000 residents, and 
 socio-economic attributes. The user can select how these pop-ups trigger by toggling the ```Pop-Ups Display``` dropdown menu. ```On Click``` renders these
 pop-ups when clicking on a neighbourhood, ```On Hover``` when hovering over neighbourhoods, and ```None``` disables pop-ups. Additionally, by toggling the
 ```Classify neighbourhoods by``` dropdown menu, you can choose to classify neighbourhoods by cluster or by the individual variables that were used to create

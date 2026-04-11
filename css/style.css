@@ -351,7 +351,7 @@
     position: absolute;
     top: 100%;
     width: 100%;
-    z-index: 1000;
+    z-index: 1;
     background-color: white;
     border: 1px solid gray;
     border-radius: 5px;
@@ -478,7 +478,7 @@ input:checked + .all_pts_buffer_toggle:before {
 
 /* Prevent page from becoming wider than the viewport when #main shifts right */
 /* no horizontal scrolling */
-html, body {
-    overflow-x: hidden;
-}
+/*html, body {*/
+/*    overflow-x: hidden;*/
+/*}*/
 

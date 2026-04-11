@@ -549,3 +549,19 @@ function bufferAll() {
         });
     }
 }
+
+// Cursor interaction on points
+const pointLayers = [
+    'library_point',
+    'early_child_centre_point',
+    'comm_centre_point',
+    'places_of_worship_point'
+];
+pointLayers.forEach(layer => { // Loop through point layers
+    map.on('mouseenter', layer, () => {
+        map.getCanvas().style.cursor = 'pointer'; // Switch cursor to pointer
+        map.on('mouseleave', layer, () => {
+            map.getCanvas().style.cursor = ''; // Switch cursor back when leaving the point
+        });
+    });
+});

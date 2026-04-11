@@ -544,7 +544,8 @@ function bufferAll() {
             'paint': {
                 'fill-color': '#888888', // Test alternative colours and style properties
                 'fill-opacity': 0.4,
-                'fill-outline-color': 'black'
+                'fill-outline-color': '#888888',
+                'fill-outline-opacity': 0.4,
             }
         });
     }

@@ -13,8 +13,8 @@ const map = new mapboxgl.Map({
         },
         show3dObjects: false
     },
-    center: [-79.31, 43.72], // starting position [lng, lat] - centered in Toronto
-    zoom: 10
+    center: [-79.2, 43.72], // starting position [lng, lat] - centered in Toronto
+    zoom: 10.2
 }) // starting zoom level
 
 // Initialize a variable to store the current pop up

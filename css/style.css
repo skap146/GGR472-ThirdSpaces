@@ -123,6 +123,14 @@
 .background-section {
     margin-top: 90px;
 }
+.background_pg_reference_text {
+    font-family: 'Palatino', sans-serif;
+    font-size: 16px;
+    text-align: left;
+    padding-left: 20vh;
+    padding-right: 20vh;
+}
+
 /* -------------- CUSTOM STYLING: FOR LAYER TOGGLE (CUSTOM CHECKBOX) -------------- */
 .check {
     font-size: 14px;

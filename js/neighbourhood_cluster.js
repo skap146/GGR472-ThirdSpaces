@@ -263,23 +263,8 @@ function updatePopUpInput(input_type) {
             type: 'click',
             target: { 'layerId': 'neighbourhoods_poly' },
             handler: (e) => {
-
-                const count_per_capita = e.feature.properties.count_per_capita;
-                const med_income = e.feature.properties.median_income;
-                const visible_minority = e.feature.properties.visible_minority_prop;
-                const bachelor_degs = e.feature.properties.bachelor_deg_prop;
-                const neigh_name = e.feature.properties.AREA_NA7;
-                const cluster_id = e.feature.properties["Cluster ID"];
-
-                active_pop_up
-                    .setLngLat(e.lngLat)
-                    .setHTML(`<strong> Cluster: </strong> ${cluster_id} 
-<br> <strong> Neighbourhood Name: </strong> ${neigh_name} 
-                        <br> <strong> Third Places Per Capita: </strong>${roundDecimals(count_per_capita, 2)}
-                        <br> <strong> Median Income: </strong>  $${med_income}
-                        <br> <strong> % Visible Minority: </strong> ${roundDecimals(visible_minority * 100, 0)}
-                        <br> <strong> % Bachelor's Degrees: </strong> ${roundDecimals(bachelor_degs * 100, 0)}`)
-                    .addTo(map); // Show popup on map
+                // create pop up as soon as mouse click occurs inside a neighbourhood
+                addPopUp(e);
             }
         })
     }
@@ -299,24 +284,30 @@ function updatePopUpInput(input_type) {
             target: { 'layerId': 'neighbourhoods_poly' },
             handler: (e) => {
                 // create pop up as soon as mouse enters a neighbourhood
-                const count_per_capita = e.feature.properties.count_per_capita;
-                const med_income = e.feature.properties.median_income;
-                const visible_minority = e.feature.properties.visible_minority_prop;
-                const bachelor_degs = e.feature.properties.bachelor_deg_prop;
-                const neigh_name = e.feature.properties.AREA_NA7;
-
-
-                active_pop_up.setLngLat(e.lngLat)
-                    .setHTML(`<strong> Neighbourhood Name: </strong> ${neigh_name} </strong>
-                    <br> <strong> Third Places Per Capita: </strong>${roundDecimals(count_per_capita, 2)}
-                    <br> <strong> Median Income: </strong>  $${med_income}
-                    <br> <strong> % Visible Minority: </strong> ${roundDecimals(visible_minority * 100, 0)}
-                    <br> <strong> % Bachelor's Degrees: </strong> ${roundDecimals(bachelor_degs * 100, 0)}`)
-                    .addTo(map);
-
+                addPopUp(e);
             }
         })
     }
+}
+
+// Adds pop up to the map of the currently clicked / hovered on neighbourhood polygon
+function addPopUp(e) {
+    const count_per_capita = e.feature.properties.count_per_capita;
+    const med_income = e.feature.properties.median_income;
+    const visible_minority = e.feature.properties.visible_minority_prop;
+    const bachelor_degs = e.feature.properties.bachelor_deg_prop;
+    const neigh_name = e.feature.properties.AREA_NA7;
+    const cluster_id = e.feature.properties["Cluster ID"];
+
+    active_pop_up
+        .setLngLat(e.lngLat)
+        .setHTML(`<strong> Cluster: </strong> ${cluster_id} 
+<br> <strong> Neighbourhood Name: </strong> ${neigh_name} 
+                        <br> <strong> Third Places Per Capita: </strong>${roundDecimals(count_per_capita, 2)}
+                        <br> <strong> Median Income: </strong>  $${med_income}
+                        <br> <strong> % Visible Minority: </strong> ${roundDecimals(visible_minority * 100, 0)}
+                        <br> <strong> % Bachelor's Degrees: </strong> ${roundDecimals(bachelor_degs * 100, 0)}`)
+        .addTo(map); // Show popup on map
 }
 
 

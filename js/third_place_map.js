@@ -53,10 +53,10 @@ load_third_place_dropdown()
 // Add all third space elements to the dropdown menu
 function load_third_place_dropdown()
 {
-    load_layer_in_dropdown('data/library.geojson', 'BranchName', 'library_point');
-    load_layer_in_dropdown('data/EARLYONChildCentres.geojson', 'buildingName', 'early_child_centre_point');
-    load_layer_in_dropdown('data/community_centres.geojson', 'ASSET_NAME', 'comm_centre_point');
-    load_layer_in_dropdown('data/Places_of_Worship.geojson', 'PLACE_NAME', 'places_of_worship_point');
+    load_layer_in_dropdown('..data/library.geojson', 'BranchName', 'library_point');
+    load_layer_in_dropdown('..data/EARLYONChildCentres.geojson', 'buildingName', 'early_child_centre_point');
+    load_layer_in_dropdown('..data/community_centres.geojson', 'ASSET_NAME', 'comm_centre_point');
+    load_layer_in_dropdown('..data/Places_of_Worship.geojson', 'PLACE_NAME', 'places_of_worship_point');
 }
 
 // Loads the names for an individual specific that

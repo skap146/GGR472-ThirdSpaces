@@ -153,10 +153,10 @@ const map = new mapboxgl.Map({
 map.on('load', () =>
 {
     // Load external GeoJSON files
-    map.addSource('library_data', {type: 'geojson',data: 'data/library.geojson'});
-    map.addSource('early_child_centre_data', {type: 'geojson', data: 'data/EarlyONChildCentres.geojson'});
-    map.addSource('comm_centre_data', {type: 'geojson', data: 'data/community_centres.geojson'});
-    map.addSource('places_of_worship_data', {type: 'geojson', data: 'data/Places_of_Worship.geojson'});
+    map.addSource('library_data', {type: 'geojson',data: '..data/library.geojson'});
+    map.addSource('early_child_centre_data', {type: 'geojson', data: '..data/EarlyONChildCentres.geojson'});
+    map.addSource('comm_centre_data', {type: 'geojson', data: '..data/community_centres.geojson'});
+    map.addSource('places_of_worship_data', {type: 'geojson', data: '..data/Places_of_Worship.geojson'});
 
     // Visualize building layer
     map.addLayer({

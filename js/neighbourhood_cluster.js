@@ -116,7 +116,7 @@ map.addControl(new mapboxgl.NavigationControl(), 'top-right');
 // fetch third space points (for aggregation into our neighbourhood polygons)
 Promise.all([
     load_layer_pts('data/library.geojson'),
-    load_layer_pts('data/EarlyONChildCentres.geojson'),
+    load_layer_pts('data/early_ON_child_centres.geojson'),
     load_layer_pts('data/Places_of_Worship.geojson'),
     load_layer_pts('data/community_centres.geojson'),
     fetch('data/tor_neighbourhoods_updated.geojson').then(response => response.json())])

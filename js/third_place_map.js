@@ -54,7 +54,7 @@ load_third_place_dropdown()
 function load_third_place_dropdown()
 {
     load_layer_in_dropdown('data/library.geojson', 'BranchName', 'library_point');
-    load_layer_in_dropdown('data/EARLYONChildCentres.geojson', 'buildingName', 'early_child_centre_point');
+    load_layer_in_dropdown('data/early_ON_child_centres.geojson', 'buildingName', 'early_child_centre_point');
     load_layer_in_dropdown('data/community_centres.geojson', 'ASSET_NAME', 'comm_centre_point');
     load_layer_in_dropdown('data/Places_of_Worship.geojson', 'PLACE_NAME', 'places_of_worship_point');
 }
@@ -154,7 +154,7 @@ map.on('load', () =>
 {
     // Load external GeoJSON files
     map.addSource('library_data', {type: 'geojson',data: 'data/library.geojson'});
-    map.addSource('early_child_centre_data', {type: 'geojson', data: 'data/EarlyONChildCentres.geojson'});
+    map.addSource('early_child_centre_data', {type: 'geojson', data: 'data/early_ON_child_centres.geojson'});
     map.addSource('comm_centre_data', {type: 'geojson', data: 'data/community_centres.geojson'});
     map.addSource('places_of_worship_data', {type: 'geojson', data: 'data/Places_of_Worship.geojson'});
 

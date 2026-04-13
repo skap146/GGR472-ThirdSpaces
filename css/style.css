@@ -69,6 +69,9 @@
 {
     font-family: 'Montserrat', sans-serif;
     color: white;
+    flex-shrink: 0;
+    font-size: 40px;
+    flex-shrink: 0; /* prevents menu text from shrinking when window is resized */
 }
 .menu_link
 {
@@ -79,6 +82,7 @@
     padding: 10px 0;
     font-size: 18px;
     white-space: nowrap;   /* prevents menu text from re-wrapping on open/close*/
+    flex-shrink: 0;
 }
 .menu_link:hover
 {
@@ -303,6 +307,7 @@
     margin-top: 5px;
     bottom: 0;
     width: 100%;
+    z-index: -5;
 }
 .map_container_cluster {
     position: absolute;
@@ -311,6 +316,7 @@
     margin-top: 5px;
     bottom: 0;
     width: 100%;
+    z-index: -5;
 }
 
 #layer_toggle
@@ -500,7 +506,7 @@ input:checked + .all_pts_buffer_toggle:before {
     margin: 0 auto; /* centers the text card */
 }
 
-/* ------------ MAP CONTROLS POSITIONING ---------------- */
+/* ------------ GENERAL POSITIONING ---------------- */
 /* Shift Mapbox controls when menu is open */
 .mapboxgl-ctrl-top-right {
     right: 10px;
@@ -518,3 +524,7 @@ body {
     overflow-x: hidden;
 }
 
+/* prevents awkard placement when window is resized */
+#main {
+    min-width: 1150px;
+}

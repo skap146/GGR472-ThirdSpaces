@@ -11,7 +11,7 @@ let visible_layers = ['library_point', 'early_child_centre_point', 'comm_centre_
 // third space dropdown element
 const dropdown_element = document.getElementById('third_place_dropdown');
 
-// current buffering distance (on load, it's 500)
+// current buffering distance (on load, it's 500m)
 let buffer_dist = 500;
 
 // current point to buffer (only one buffer can be active at a time)
@@ -544,10 +544,12 @@ function bufferAll() {
             'paint': {
                 'fill-color': '#888888', // Test alternative colours and style properties
                 'fill-opacity': 0.4,
-                'fill-outline-color': '#888888',
-                'fill-outline-opacity': 0.4,
+                'fill-outline-color': 'rgba(0, 0, 0, 0)',
             }
         });
+        // Ensures the buffers are rendered below the point layers (so the points always display on top of the buffers)
+        let bottom_layer = map.getStyle().layers[0].id
+        map.moveLayer('all_buffers_poly', bottom_layer);
     }
 }
 

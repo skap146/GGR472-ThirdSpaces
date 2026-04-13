@@ -133,7 +133,7 @@
 } 
 .background_pg_reference_text {
     font-family: 'Palatino', sans-serif;
-    font-size: 16px;
+    font-size: 14px;
     text-align: left;
     padding-left: 20vh;
     padding-right: 20vh;
@@ -250,6 +250,7 @@
     right: 20px;
     z-index: 100;
     opacity: 1;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.1);
 }
 #cluster-desc-title {
     font-size: 18px;

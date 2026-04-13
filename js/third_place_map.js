@@ -220,7 +220,14 @@ function displayPopUp(e, field_names) {
     let msg = ""
     console.log(field_names);
     field_names.forEach(item => {
-        msg += `<div>${item.display_name}: ${e.feature.properties[item.field_name]}</div>`;
+        // show data (if available), else write 'unavailable'
+        if (e.feature.properties[item.field_name]) {
+            msg += `<div>${item.display_name}: ${e.feature.properties[item.field_name]}</div>`;
+        }
+        else {
+            msg +=
+                `<div style="display: flex; gap: 5px"><div>${item.display_name}: </div><div style="color: red"> unavailable </div></div>`;
+        }
     })
 
     // Add the show walkability button (which when clicked renders a buffer around the point)

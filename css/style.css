@@ -90,15 +90,26 @@
 }
 .third_place_pg_title
 {
-    padding-top: 5vh;
+    padding-top: 1.5vh;
     font-size: 25px;
     font-family: 'ProximaNova-Bold', sans-serif;
 }
 .neighbourhood_pg_title
 {
-    padding-top: 5vh;
+    padding-top: 1.5vh;
     font-size: 25px;
     font-family: 'ProximaNova-Bold', sans-serif;
+}
+/* ------------ HOW-TO BLURB TEXT STYLING ---------------- */
+.heading2-text {
+    font-size: 18px;
+    font-family: 'ProximaNova-Bold', sans-serif;
+}
+.instruction-text {
+    font-size: 16px;
+    text-align: center;
+    padding-left: 10vh;
+    padding-right: 10vh;
 }
 
 /* ------------ BACKGROUND PAGE TEXT STYLING ---------------- */

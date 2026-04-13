@@ -337,8 +337,8 @@ function createBuffer(coords)
         'source': 'walkability_buffer_data',
         'paint': {
             'fill-color': '#888888', // Test alternative colours and style properties
-            'fill-opacity': 0.4,
-            'fill-outline-color': 'black'
+            'fill-opacity': 0.25,
+            'fill-outline-color': 'rgba(109, 109, 109, 0.4)'
         }
     });
 
@@ -473,8 +473,8 @@ function changebufDist(buf_val) {
                 'source': 'walkability_buffer_data',
                 'paint': {
                     'fill-color': '#888888', // Test alternative colours and style properties
-                    'fill-opacity': 0.4,
-                    'fill-outline-color': 'black'
+                    'fill-opacity': 0.25,
+                    'fill-outline-color': 'rgba(109, 109, 109, 0.4)'
                 }
             });
         }
@@ -543,8 +543,8 @@ function bufferAll() {
             'source': 'all_buffers',
             'paint': {
                 'fill-color': '#888888', // Test alternative colours and style properties
-                'fill-opacity': 0.4,
-                'fill-outline-color': 'rgba(0, 0, 0, 0)',
+                'fill-opacity': 0.25,
+                'fill-outline-color': 'rgba(109, 109, 109, 0.4)',
             }
         });
         // Ensures the buffers are rendered below the point layers (so the points always display on top of the buffers)
